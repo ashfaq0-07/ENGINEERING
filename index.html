@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Engineering Study Resources Dashboard</title>
+    <title>Engineering Study Resources </title>
     <style>
         * {
             margin: 0;
@@ -190,7 +190,7 @@
 
         .search-input {
             width: 100%;
-            padding: 15px 50px 15px 20px;
+            padding: 15px 140px 15px 20px;
             border: 2px solid #e2e8f0;
             border-radius: 25px;
             font-size: 1em;
@@ -270,6 +270,102 @@
                 justify-content: flex-start;
             }
         }
+        /* Search Controls */
+.search-controls {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-mode-toggle {
+    padding: 8px 12px;
+    background: #4f46e5;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    font-size: 0.85em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.search-mode-toggle:hover {
+    background: #3730a3;
+}
+
+/* Update existing search input - MODIFY your existing .search-input rule */
+.search-input {
+    width: 100%;
+    padding: 15px 140px 15px 20px; /* Updated: increased right padding from 50px to 140px */
+    border: 2px solid #e2e8f0;
+    border-radius: 25px;
+    font-size: 1em;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+/* Search Result Highlighting */
+.search-highlight {
+    background: linear-gradient(135deg, #fef3c7, #fde047) !important;
+    border: 2px solid #f59e0b !important;
+    transform: scale(1.02) !important;
+    box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3) !important;
+}
+
+/* No Results Message */
+.no-results {
+    text-align: center;
+    padding: 40px;
+    color: #64748b;
+    font-size: 1.1em;
+    background: #f8fafc;
+    border-radius: 15px;
+    border: 2px dashed #cbd5e1;
+    margin: 20px 0;
+}
+
+.no-results h3 {
+    color: #475569;
+    margin-bottom: 10px;
+    font-size: 1.3em;
+}
+
+.no-results p {
+    color: #64748b;
+    font-size: 1em;
+}
+
+/* Mobile Responsive Updates */
+@media (max-width: 768px) {
+    .search-input {
+        padding-right: 120px; /* Adjusted for mobile */
+    }
+    
+    .search-mode-toggle {
+        font-size: 0.75em;
+        padding: 6px 8px;
+    }
+    
+    .search-controls {
+        gap: 5px;
+    }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+    .search-input {
+        padding-right: 100px;
+    }
+    
+    .search-mode-toggle {
+        font-size: 0.7em;
+        padding: 4px 6px;
+    }
+}
     </style>
 </head>
 <body>
@@ -287,10 +383,13 @@
         </div>
 
         <div class="content">
-            <div class="search-bar">
-                <input type="text" class="search-input" placeholder="Search for topics, resources, or chapters..." id="searchInput">
-                <span class="search-icon">🔍</span>
-            </div>
+           <div class="search-bar">
+    <input type="text" class="search-input" placeholder="Search across all subjects or current tab..." id="searchInput">
+    <div class="search-controls">
+        <button class="search-mode-toggle" id="searchModeToggle">Search</button>
+        <span class="search-icon"></span>
+    </div>
+</div>
 
             <!-- Physics Tab -->
          <div id="physics" class="tab-panel active">
@@ -300,7 +399,7 @@
             <div class="resource-section">
                   <h4>Practice Sheet</h4>
                   <div class="resource-links">
-                        <a href="https://drive.google.com/file/d/1MQDMzY9y5eaK_Ii4IuiEHgN04qtrtVXb/view?usp=drivesdk" target="_blank" class="resource-link">Vector Practice</a>
+                        <a href="https://drive.google.com/file/d/1MQDMzY9y5eaK_Ii4IuiEHgN04qtrtVXb/view?usp=drivesdk" target="_blank" class="resource-link">Vector Practice Practice</a>
                   </div>
             </div>
             <div class="resource-section">
@@ -323,7 +422,7 @@
             <div class="resource-section">
                   <h4>Practice Sheet</h4>
                   <div class="resource-links">
-                        <a href="https://drive.google.com/file/d/1SN6PvfGeeXqDYnK30NzIG3ThVoUDHfe1/view?usp=drivesdk" target="_blank" class="resource-link">Newtonian Mechanics</a>
+                        <a href="https://drive.google.com/file/d/1SN6PvfGeeXqDYnK30NzIG3ThVoUDHfe1/view?usp=drivesdk" target="_blank" class="resource-link">Newtonian Mechanics Practice</a>
                   </div>
             </div>
             <div class="resource-section">
@@ -344,7 +443,7 @@
             <div class="resource-section">
                   <h4>Practice Sheet</h4>
                   <div class="resource-links">
-                        <a href="https://drive.google.com/file/d/1c5PF5B-nihlmNoXNaqy770i8HFWRUX-V/view?usp=drivesdk" target="_blank" class="resource-link">WEP Practice</a>
+                        <a href="https://drive.google.com/file/d/1c5PF5B-nihlmNoXNaqy770i8HFWRUX-V/view?usp=drivesdk" target="_blank" class="resource-link">WEP Practice Practice</a>
                   </div>
             </div>
             <div class="resource-section">
@@ -362,7 +461,7 @@
             <div class="resource-section">
                   <h4>Practice Sheet</h4>
                   <div class="resource-links">
-                        <a href="https://drive.google.com/file/d/13OxNSWGHMAMqQK6TKyUgEmgGoAO8e7_D/view?usp=drivesdk" target="_blank" class="resource-link">Gravity Practice</a>
+                        <a href="https://drive.google.com/file/d/13OxNSWGHMAMqQK6TKyUgEmgGoAO8e7_D/view?usp=drivesdk" target="_blank" class="resource-link">Gravity Practice Practice</a>
                   </div>
             </div>
             <div class="resource-section">
@@ -381,7 +480,7 @@
             <div class="resource-section">
                   <h4>Practice Sheet</h4>
                   <div class="resource-links">
-                        <a href="https://drive.google.com/file/d/1p7FN-wZ3BADfCNQbc_c3-EUBQ1JvzaeL/view?usp=drivesdk" target="_blank" class="resource-link">Structural Properties</a>
+                        <a href="https://drive.google.com/file/d/1p7FN-wZ3BADfCNQbc_c3-EUBQ1JvzaeL/view?usp=drivesdk" target="_blank" class="resource-link">Structural Properties Practice</a>
                   </div>
             </div>
             <div class="resource-section">
@@ -399,7 +498,7 @@
             <div class="resource-section">
                   <h4>Practice Sheet</h4>
                   <div class="resource-links">
-                        <a href="https://drive.google.com/file/d/12y2xLmMSLeLatlkIdWdPqtYqr7sfYrpI/view?usp=drivesdk" target="_blank" class="resource-link">Periodic Motion</a>
+                        <a href="https://drive.google.com/file/d/12y2xLmMSLeLatlkIdWdPqtYqr7sfYrpI/view?usp=drivesdk" target="_blank" class="resource-link">Periodic Motion Practice</a>
                   </div>
             </div>
             <div class="resource-section">
@@ -418,7 +517,7 @@
             <div class="resource-section">
                   <h4>Practice Sheet</h4>
                   <div class="resource-links">
-                        <a href="https://drive.google.com/file/d/1JHckKNPWpLZiHFZFbo-Dkt3o6dGF5L4Z/view?usp=drivesdk" target="_blank" class="resource-link">Ideal Gas Theory</a>
+                        <a href="https://drive.google.com/file/d/1JHckKNPWpLZiHFZFbo-Dkt3o6dGF5L4Z/view?usp=drivesdk" target="_blank" class="resource-link">Ideal Gas Theory Practice</a>
                   </div>
             </div>
             <div class="resource-section">
@@ -437,7 +536,7 @@
             <div class="resource-section">
                   <h4>Practice Sheet</h4>
                   <div class="resource-links">
-                        <a href="https://drive.google.com/file/d/1yPiTQoSJJOaYw8LPcLE5NUm3LhokE2T5/view?usp=drivesdk" target="_blank" class="resource-link">Thermodynamics</a>
+                        <a href="https://drive.google.com/file/d/1yPiTQoSJJOaYw8LPcLE5NUm3LhokE2T5/view?usp=drivesdk" target="_blank" class="resource-link">Thermodynamics Practice</a>
                   </div>
             </div>
             <div class="resource-section">
@@ -457,7 +556,7 @@
     <div class="resource-section">
         <h4>Practice Sheet</h4>
         <div class="resource-links">
-            <a href="https://drive.google.com/file/d/1rRvyaT3jSsckjVTeRtR_q1uBKPypHAic/view?usp=drivesdk" target="_blank" class="resource-link">Static Electricity</a>
+            <a href="https://drive.google.com/file/d/1rRvyaT3jSsckjVTeRtR_q1uBKPypHAic/view?usp=drivesdk" target="_blank" class="resource-link">Static Electricity Practice</a>
         </div>
     </div>
     <div class="resource-section">
@@ -476,7 +575,7 @@
             <div class="resource-section">
                   <h4>Practice Sheet</h4>
                   <div class="resource-links">
-                        <a href="https://drive.google.com/file/d/1bDH2qP4xpQ1ECq3M37y6Ij1LYPIXoxLY/view?usp=drivesdk" target="_blank" class="resource-link">Current Electricity</a>
+                        <a href="https://drive.google.com/file/d/1bDH2qP4xpQ1ECq3M37y6Ij1LYPIXoxLY/view?usp=drivesdk" target="_blank" class="resource-link">Current Electricity Practice</a>
                   </div>
             </div>
             <div class="resource-section">
@@ -494,7 +593,7 @@
             <div class="resource-section">
                   <h4>Practice Sheet</h4>
                   <div class="resource-links">
-                        <a href="https://drive.google.com/file/d/18h9GaiEB2nBXQnSzx2XmFsbL9cXMjca1/view?usp=drivesdk" target="_blank" class="resource-link">Physical Optics</a>
+                        <a href="https://drive.google.com/file/d/18h9GaiEB2nBXQnSzx2XmFsbL9cXMjca1/view?usp=drivesdk" target="_blank" class="resource-link">Physical Optics Practice</a>
                   </div>
             </div>
             <div class="resource-section">
@@ -514,7 +613,7 @@
             <div class="resource-section">
                   <h4>Practice Sheet</h4>
                   <div class="resource-links">
-                        <a href="https://drive.google.com/file/d/1xkxX4m400WUzRHiWjoJkeLsBQ2iGa4Yb/view?usp=drivesdk" target="_blank" class="resource-link">Modern Physics</a>
+                        <a href="https://drive.google.com/file/d/1xkxX4m400WUzRHiWjoJkeLsBQ2iGa4Yb/view?usp=drivesdk" target="_blank" class="resource-link">Modern Physics Practice</a>
                   </div>
             </div>
             <div class="resource-section">
@@ -532,7 +631,7 @@
             <div class="resource-section">
                   <h4>Practice Sheet</h4>
                   <div class="resource-links">
-                        <a href="https://drive.google.com/file/d/1XChV5JlZFiBuat3bLX6ZVvECmIJEGRU9/view?usp=drivesdk" target="_blank" class="resource-link">Nuclear Physics</a>
+                        <a href="https://drive.google.com/file/d/1XChV5JlZFiBuat3bLX6ZVvECmIJEGRU9/view?usp=drivesdk" target="_blank" class="resource-link">Nuclear Physics Practice</a>
                   </div>
             </div>
             <div class="resource-section">
@@ -549,7 +648,7 @@
             <div class="resource-section">
                   <h4>Practice Sheet</h4>
                   <div class="resource-links">
-                        <a href="https://drive.google.com/file/d/13Hlau17bh4JsdyvTwlwTJN60Tuo15R-P/view?usp=drivesdk" target="_blank" class="resource-link">Semiconductor</a>
+                        <a href="https://drive.google.com/file/d/13Hlau17bh4JsdyvTwlwTJN60Tuo15R-P/view?usp=drivesdk" target="_blank" class="resource-link">Semiconductor Practice</a>
                   </div>
             </div>
             <div class="resource-section">
@@ -574,7 +673,7 @@
             <div class="resource-section">
                   <h4>Practice Sheet</h4>
                   <div class="resource-links">
-                        <a href="https://drive.google.com/file/d/1o0-yP0WukKQ7rsGgL3kVGIsq0AZYHBan/view?usp=drivesdk" target="_blank" class="resource-link">Qualitative Analysis</a>
+                        <a href="https://drive.google.com/file/d/1o0-yP0WukKQ7rsGgL3kVGIsq0AZYHBan/view?usp=drivesdk" target="_blank" class="resource-link">Qualitative Chemistry Practice</a>
                   </div>
             </div>
             <div class="resource-section">
@@ -592,7 +691,7 @@
             <div class="resource-section">
                   <h4>Practice Sheet</h4>
                   <div class="resource-links">
-                        <a href="https://drive.google.com/file/d/1i0_Q5lHqr6mqJzFvsTVoKyMJRKPc_Qmx/view?usp=drivesdk" target="_blank" class="resource-link">Stoichiometric Chemistry</a>
+                        <a href="https://drive.google.com/file/d/1i0_Q5lHqr6mqJzFvsTVoKyMJRKPc_Qmx/view?usp=drivesdk" target="_blank" class="resource-link">Stoichiometric Chemistry Practice</a>
                   </div>
             </div>
             <div class="resource-section">
@@ -610,7 +709,7 @@
             <div class="resource-section">
                   <h4>Practice Sheet</h4>
                   <div class="resource-links">
-                        <a href="https://drive.google.com/file/d/11GD-UbonrinW_r36j49dXp5SJ7iYfOTl/view?usp=drivesdk" target="_blank" class="resource-link">Electrochemistry</a>
+                        <a href="https://drive.google.com/file/d/11GD-UbonrinW_r36j49dXp5SJ7iYfOTl/view?usp=drivesdk" target="_blank" class="resource-link">Electrochemistry Practice</a>
                   </div>
             </div>
             <div class="resource-section">
@@ -628,7 +727,7 @@
             <div class="resource-section">
                   <h4>Practice Sheet</h4>
                   <div class="resource-links">
-                        <a href="https://drive.google.com/file/d/1pB7xEKWaXk3v2WrPARNFduCZWytNPgLp/view?usp=drivesdk" target="_blank" class="resource-link">Periodic Properties</a>
+                        <a href="https://drive.google.com/file/d/1pB7xEKWaXk3v2WrPARNFduCZWytNPgLp/view?usp=drivesdk" target="_blank" class="resource-link">Periodic Properties Practice</a>
                   </div>
             </div>
             <div class="resource-section">
@@ -649,7 +748,7 @@
     <div class="resource-section">
         <h4>Practice Sheet</h4>
         <div class="resource-links">
-            <a href="https://drive.google.com/file/d/1IptfI4N1J5niSYG09YIY9tzaQD_vrl3X/view?usp=drivesdk" target="_blank" class="resource-link">Chemical Changes</a>
+            <a href="https://drive.google.com/file/d/1IptfI4N1J5niSYG09YIY9tzaQD_vrl3X/view?usp=drivesdk" target="_blank" class="resource-link">Chemical Changes Practice</a>
         </div>
     </div>
     <div class="resource-section">
@@ -667,7 +766,7 @@
     <div class="resource-section">
         <h4>Practice Sheet</h4>
         <div class="resource-links">
-            <a href="https://drive.google.com/file/d/1aNL9HX8IoNv9gtf0Q8zxCokNCl7N4oEs/view?usp=drivesdk" target="_blank" class="resource-link">Vocational Chemistry</a>
+            <a href="https://drive.google.com/file/d/1aNL9HX8IoNv9gtf0Q8zxCokNCl7N4oEs/view?usp=drivesdk" target="_blank" class="resource-link">Vocational Chemistry Practice</a>
         </div>
     </div>
     <div class="resource-section">
@@ -684,14 +783,14 @@
     <div class="resource-section">
         <h4>Practice Sheet</h4>
         <div class="resource-links">
-            <a href="https://drive.google.com/file/d/1qGy8sVKgKFaOfI65T16IMAzBJIsFq0cR/view?usp=drivesdk" target="_blank" class="resource-link">Environmental Chemistry</a>
+            <a href="https://drive.google.com/file/d/1qGy8sVKgKFaOfI65T16IMAzBJIsFq0cR/view?usp=drivesdk" target="_blank" class="resource-link">Environmental Chemistry Practice</a>
         </div>
     </div>
     <div class="resource-section">
         <h4>UDVASH  LECTURE SLIDES</h4>
         <div class="resource-links">
-            <a href="https://drive.google.com/file/d/1_RxY-_to8udE-hipZKjNCTEuAHjosgp5/view?usp=drivesdk" class="resource-link" target="_blank">poribesh 1 </a>
-            <a href="https://drive.google.com/file/d/1ufvnyzYkkmyYnO137vBFKuS9SiVZid6W/view?usp=drivesdk" class="resource-link" target="_blank">poribesh 2 </a>
+            <a href="https://drive.google.com/file/d/1_RxY-_to8udE-hipZKjNCTEuAHjosgp5/view?usp=drivesdk" class="resource-link" target="_blank">LECTURE 1 </a>
+            <a href="https://drive.google.com/file/d/1ufvnyzYkkmyYnO137vBFKuS9SiVZid6W/view?usp=drivesdk" class="resource-link" target="_blank">LECTURE 2 </a>
         </div>
     </div>
 </div>
@@ -702,7 +801,7 @@
     <div class="resource-section">
         <h4>Practice Sheet</h4>
         <div class="resource-links">
-            <a href="https://drive.google.com/file/d/1jh8cRQzoCc6KBJiqcGZ5Jp0OU9AxOBXl/view?usp=drivesdk" target="_blank" class="resource-link">Organic Chemistry</a>
+            <a href="https://drive.google.com/file/d/1jh8cRQzoCc6KBJiqcGZ5Jp0OU9AxOBXl/view?usp=drivesdk" target="_blank" class="resource-link">Organic Chemistry Practice</a>
         </div>
     </div>
     <div class="resource-section">
@@ -981,10 +1080,10 @@
                         <li><a href="https://drive.google.com/file/d/1zO3uUTG30UiAfX4QRxqhZ0JFN3Z3s0nk/view?usp=drivesdk" target="_blank">Modals & Adjectives</a></li>
                         <li><a href="https://drive.google.com/file/d/1Lfb1EmwYg4XKW8UGXUlciEdUkZdtRcVN/view?usp=drivesdk" target="_blank">Comparisons & Connectors</a></li>
                         <li><a href="https://drive.google.com/file/d/1rTyHSW91eMj6j9QbI67-OGR0EFLFDKyy/view?usp=drivesdk" target="_blank">Conjunctions</a></li>
-                        <li><a href="https://drive.google.com/file/d/17GecIcFy76F7I15pWP01KG7JXVL1MGOA/view?usp=drivesdk" target="_blank">Voice & Clauses</a></li>
+                        <li><a href="https://drive.google.com/file/d/17GecIcFy76F7I15pWP01KG7JXVL1MGOA/view?usp=drivesdk" target="_blank">Voice Change, Causative Verbs, Relative Clauses, Use of That, Subjunctive</a></li>
                         <li><a href="https://drive.google.com/file/d/1qU6PHaGmCWMzBjkgPiibtyzupGq3le4r/view?usp=drivesdk" target="_blank">Common Problems</a></li>
-                        <li><a href="https://drive.google.com/file/d/1UW_2X2ISWuGvmMvF0kK-bPDapa7mKiFD/view?usp=drivesdk" target="_blank">Verb Forms</a></li>
-                        <li><a href="https://drive.google.com/file/d/1PaQmeaoxG4GkkVkNDYT_CQunfUp36h6R/view?usp=drivesdk" target="_blank">Narration</a></li>
+                        <li><a href="https://drive.google.com/file/d/1UW_2X2ISWuGvmMvF0kK-bPDapa7mKiFD/view?usp=drivesdk" target="_blank"> Right Form of Verb,Number, Gender, Modifier, Group Verb</a></li>
+                        <li><a href="https://drive.google.com/file/d/1PaQmeaoxG4GkkVkNDYT_CQunfUp36h6R/view?usp=drivesdk" target="_blank">Narration &amp; Transformation of Sentences </a></li>
                         <li><a href="https://drive.google.com/file/d/18oHl5Fw49_87k6uftFwnPiNwoxTH4wWp/view?usp=drivesdk" target="_blank">Error Correction</a></li>
                         <li><a href="https://drive.google.com/file/d/1Ixx87EacRY-UmLat_vCnMTwnymA1-xSs/view?usp=drivesdk" target="_blank">Prepositions</a></li>
                         <li><a href="https://drive.google.com/file/d/15sVIwKpmObChDYGxwL1XIcLUYHL_iwJD/view?usp=drivesdk" target="_blank">Vocabulary</a></li>
@@ -1015,63 +1114,414 @@
     </div>
 
     <script>
-        // Tab switching functionality
-        const tabs = document.querySelectorAll('.nav-tab');
-        const panels = document.querySelectorAll('.tab-panel');
+        // Enhanced Search JavaScript for Engineering Dashboard
 
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                // Remove active class from all tabs and panels
-                tabs.forEach(t => t.classList.remove('active'));
-                panels.forEach(p => p.classList.remove('active'));
+// Enhanced Search JavaScript for Engineering Dashboard
 
-                // Add active class to clicked tab and corresponding panel
-                tab.classList.add('active');
-                const targetPanel = document.getElementById(tab.dataset.tab);
-                if (targetPanel) {
-                    targetPanel.classList.add('active');
-                }
-            });
-        });
+// Global variables
+let searchAllTabs = true; // Default to search all tabs
+const searchInput = document.getElementById('searchInput');
+const searchModeToggle = document.getElementById('searchModeToggle');
+const tabs = document.querySelectorAll('.nav-tab');
+const panels = document.querySelectorAll('.tab-panel');
 
-        // Search functionality
-        const searchInput = document.getElementById('searchInput');
+// Initialize the dashboard
+document.addEventListener('DOMContentLoaded', function() {
+    initializeDashboard();
+    setupEventListeners();
+    animateCardsOnLoad();
+});
+
+// Initialize dashboard components
+function initializeDashboard() {
+    // Set initial search mode
+    updateSearchModeButton();
+    
+    // Add subject data attributes to cards if not present
+    addSubjectAttributes();
+}
+
+// Setup all event listeners
+function setupEventListeners() {
+    // Tab switching
+    tabs.forEach(tab => {
+        tab.addEventListener('click', handleTabClick);
+    });
+
+    // Search functionality
+    searchInput.addEventListener('input', handleSearchInput);
+    
+    // Search mode toggle
+    if (searchModeToggle) {
+        searchModeToggle.addEventListener('click', handleSearchModeToggle);
+    }
+
+    // Clear search on tab switch (only in current tab mode)
+    tabs.forEach(tab => {
+        tab.addEventListener('click', handleTabSwitchSearch);
+    });
+}
+
+// Handle tab clicking
+function handleTabClick(event) {
+    const clickedTab = event.target;
+    
+    // Remove active class from all tabs and panels
+    tabs.forEach(t => t.classList.remove('active'));
+    panels.forEach(p => p.classList.remove('active'));
+
+    // Add active class to clicked tab and corresponding panel
+    clickedTab.classList.add('active');
+    const targetPanel = document.getElementById(clickedTab.dataset.tab);
+    if (targetPanel) {
+        targetPanel.classList.add('active');
+    }
+}
+
+// Handle search input changes
+function handleSearchInput(event) {
+    const query = event.target.value;
+    performSearch(query);
+}
+
+// Handle search mode toggle
+function handleSearchModeToggle() {
+    searchAllTabs = !searchAllTabs;
+    updateSearchModeButton();
+    
+    // Re-run search if there's text in the input
+    const query = searchInput.value;
+    if (query.trim()) {
+        performSearch(query);
+    } else {
+        // If no search query, show all cards in current mode
+        resetAllCards();
+    }
+}
+
+// Handle search behavior when switching tabs
+function handleTabSwitchSearch() {
+    if (!searchAllTabs) {
+        // In current tab mode, clear search and show all cards
+        searchInput.value = '';
+        setTimeout(() => {
+            resetAllCards();
+        }, 100);
+    }
+    // In search all mode, keep the search active
+}
+
+// Main search function
+function performSearch(query) {
+    query = query.toLowerCase().trim();
+    
+    if (!query) {
+        resetAllCards();
+        return;
+    }
+    
+    if (searchAllTabs) {
+        searchAcrossAllTabs(query);
+    } else {
+        searchCurrentTabOnly(query);
+    }
+}
+
+// Search across all tabs
+function searchAcrossAllTabs(query) {
+    const allCards = document.querySelectorAll('.subject-card, .english-card');
+    let matchingCards = [];
+    let hasResults = false;
+    
+    // Clear previous highlights
+    clearHighlights();
+    
+    allCards.forEach(card => {
+        const cardText = card.textContent.toLowerCase();
+        const keywords = card.dataset.keywords || '';
+        const shouldShow = cardText.includes(query) || keywords.toLowerCase().includes(query);
         
-        searchInput.addEventListener('input', function() {
-            const query = this.value.toLowerCase();
-            const activePanel = document.querySelector('.tab-panel.active');
-            const cards = activePanel.querySelectorAll('.subject-card, .english-card');
+        if (shouldShow) {
+            hasResults = true;
+            matchingCards.push(card);
             
-            cards.forEach(card => {
-                const cardText = card.textContent.toLowerCase();
-                const keywords = card.dataset.keywords || '';
-                const shouldShow = cardText.includes(query) || keywords.toLowerCase().includes(query);
-                
-                card.style.display = shouldShow ? 'block' : 'none';
-            });
+            // Highlight matching cards
+            card.classList.add('search-highlight');
+        } else {
+            card.classList.remove('search-highlight');
+        }
+        
+        // Hide all cards initially
+        card.style.display = 'none';
+    });
+    
+    if (hasResults && matchingCards.length > 0) {
+        // Show the first matching card's tab and all matching cards
+        const firstMatch = matchingCards[0];
+        const tabToShow = getTabFromCard(firstMatch);
+        
+        if (tabToShow) {
+            switchToTab(tabToShow);
+        }
+        
+        // Show all matching cards
+        matchingCards.forEach(card => {
+            card.style.display = 'block';
         });
+        
+        // Update search placeholder
+        updateSearchPlaceholder(`Found ${matchingCards.length} result(s) across all subjects`);
+    } else {
+        showNoResults();
+    }
+}
 
-        // Clear search when switching tabs
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                searchInput.value = '';
-                // Show all cards in the newly active panel
-                setTimeout(() => {
-                    const activePanel = document.querySelector('.tab-panel.active');
-                    const cards = activePanel.querySelectorAll('.subject-card, .english-card');
-                    cards.forEach(card => card.style.display = 'block');
-                }, 100);
-            });
-        });
+// Search only in current tab
+function searchCurrentTabOnly(query) {
+    const activePanel = document.querySelector('.tab-panel.active');
+    if (!activePanel) return;
+    
+    const cards = activePanel.querySelectorAll('.subject-card, .english-card');
+    let hasResults = false;
+    
+    // Clear previous highlights
+    clearHighlights();
+    
+    cards.forEach(card => {
+        const cardText = card.textContent.toLowerCase();
+        const keywords = card.dataset.keywords || '';
+        const shouldShow = cardText.includes(query) || keywords.toLowerCase().includes(query);
+        
+        card.style.display = shouldShow ? 'block' : 'none';
+        
+        if (shouldShow) {
+            hasResults = true;
+            card.classList.add('search-highlight');
+        } else {
+            card.classList.remove('search-highlight');
+        }
+    });
+    
+    if (!hasResults) {
+        showNoResultsInCurrentTab();
+    } else {
+        hideNoResults();
+    }
+}
 
-        // Add smooth scrolling for better UX
-        document.addEventListener('DOMContentLoaded', function() {
-            // Animate cards on load
-            const cards = document.querySelectorAll('.subject-card, .english-card');
-            cards.forEach((card, index) => {
-                card.style.animationDelay = `${index * 0.1}s`;
-            });
-        });
+// Helper function to get tab from card
+function getTabFromCard(card) {
+    // First try data-subject attribute
+    if (card.dataset.subject) {
+        return card.dataset.subject;
+    }
+    
+    // Fallback to finding parent tab panel
+    const parentPanel = card.closest('.tab-panel');
+    return parentPanel ? parentPanel.id : null;
+}
+
+// Helper function to switch to a specific tab
+function switchToTab(tabId) {
+    // Remove active from all tabs and panels
+    tabs.forEach(tab => tab.classList.remove('active'));
+    panels.forEach(panel => panel.classList.remove('active'));
+    
+    // Find and activate the target tab and panel
+    const targetTab = document.querySelector(`[data-tab="${tabId}"]`);
+    const targetPanel = document.getElementById(tabId);
+    
+    if (targetTab && targetPanel) {
+        targetTab.classList.add('active');
+        targetPanel.classList.add('active');
+    }
+}
+
+// Reset all cards to visible state
+function resetAllCards() {
+    const allCards = document.querySelectorAll('.subject-card, .english-card');
+    allCards.forEach(card => {
+        card.style.display = 'block';
+        card.classList.remove('search-highlight');
+    });
+    
+    hideNoResults();
+    resetSearchPlaceholder();
+}
+
+// Clear search highlights
+function clearHighlights() {
+    const highlightedCards = document.querySelectorAll('.search-highlight');
+    highlightedCards.forEach(card => {
+        card.classList.remove('search-highlight');
+    });
+}
+
+// Update search mode button text
+function updateSearchModeButton() {
+    if (searchModeToggle) {
+        searchModeToggle.textContent = searchAllTabs ? 'Search All🗘' : 'Current Tab🗘';
+        searchModeToggle.style.background = searchAllTabs ? '#4f46e5' : '#059669';
+    }
+}
+
+// Update search input placeholder
+function updateSearchPlaceholder(text) {
+    searchInput.placeholder = text;
+}
+
+// Reset search input placeholder
+function resetSearchPlaceholder() {
+    searchInput.placeholder = 'Search across all subjects or current tab...';
+}
+
+// Show no results message
+function showNoResults() {
+    hideNoResults(); // Remove any existing no results message
+    
+    const activePanel = document.querySelector('.tab-panel.active');
+    if (activePanel) {
+        const noResultsDiv = document.createElement('div');
+        noResultsDiv.className = 'no-results';
+        noResultsDiv.id = 'noResultsMessage';
+        noResultsDiv.innerHTML = `
+            <h3>No results found</h3>
+            <p>Try searching with different keywords or switch to "Current Tab"</p>
+        `;
+        activePanel.appendChild(noResultsDiv);
+    }
+}
+
+// Show no results in current tab
+function showNoResultsInCurrentTab() {
+    hideNoResults();
+    
+    const activePanel = document.querySelector('.tab-panel.active');
+    if (activePanel) {
+        const noResultsDiv = document.createElement('div');
+        noResultsDiv.className = 'no-results';
+        noResultsDiv.id = 'noResultsMessage';
+        noResultsDiv.innerHTML = `
+            <h3>No results found in this tab</h3>
+            <p>Try searching in "Search All" or use different keywords</p>
+        `;
+        activePanel.appendChild(noResultsDiv);
+    }
+}
+
+// Hide no results message
+function hideNoResults() {
+    const existingMessage = document.getElementById('noResultsMessage');
+    if (existingMessage) {
+        existingMessage.remove();
+    }
+}
+
+// Add subject data attributes to cards
+function addSubjectAttributes() {
+    // Add physics subject attribute
+    const physicsCards = document.querySelectorAll('#physics .subject-card');
+    physicsCards.forEach(card => {
+        if (!card.dataset.subject) {
+            card.dataset.subject = 'physics';
+        }
+    });
+    
+    // Add chemistry subject attribute
+    const chemistryCards = document.querySelectorAll('#chemistry .subject-card');
+    chemistryCards.forEach(card => {
+        if (!card.dataset.subject) {
+            card.dataset.subject = 'chemistry';
+        }
+    });
+    
+    // Add mathematics subject attribute
+    const mathematicsCards = document.querySelectorAll('#mathematics .subject-card');
+    mathematicsCards.forEach(card => {
+        if (!card.dataset.subject) {
+            card.dataset.subject = 'mathematics';
+        }
+    });
+    
+    // Add english subject attribute
+    const englishCards = document.querySelectorAll('#english .english-card');
+    englishCards.forEach(card => {
+        if (!card.dataset.subject) {
+            card.dataset.subject = 'english';
+        }
+    });
+}
+
+// Animate cards on load
+function animateCardsOnLoad() {
+    const cards = document.querySelectorAll('.subject-card, .english-card');
+    cards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+    });
+}
+
+// Advanced search features
+function searchWithFilters(query, filters = {}) {
+    // This function can be extended for advanced filtering
+    // filters could include: subject, resourceType, etc.
+    
+    let results = [];
+    const allCards = document.querySelectorAll('.subject-card, .english-card');
+    
+    allCards.forEach(card => {
+        let matches = true;
+        
+        // Text/keyword matching
+        if (query) {
+            const cardText = card.textContent.toLowerCase();
+            const keywords = card.dataset.keywords || '';
+            matches = cardText.includes(query.toLowerCase()) || 
+                     keywords.toLowerCase().includes(query.toLowerCase());
+        }
+        
+        // Subject filtering
+        if (filters.subject && matches) {
+            matches = card.dataset.subject === filters.subject;
+        }
+        
+        if (matches) {
+            results.push(card);
+        }
+    });
+    
+    return results;
+}
+
+// Keyboard shortcuts
+document.addEventListener('keydown', function(event) {
+    // Ctrl/Cmd + K to focus search
+    if ((event.ctrlKey || event.metaKey) && event.key === 'k') {
+        event.preventDefault();
+        searchInput.focus();
+    }
+    
+    // Escape to clear search
+    if (event.key === 'Escape' && document.activeElement === searchInput) {
+        searchInput.value = '';
+        performSearch('');
+        searchInput.blur();
+    }
+    
+    // Ctrl/Cmd + Shift + F to toggle search mode
+    if ((event.ctrlKey || event.metaKey) && event.shiftKey && event.key === 'F') {
+        event.preventDefault();
+        handleSearchModeToggle();
+    }
+});
+
+// Export functions for potential external use
+window.dashboardSearch = {
+    performSearch,
+    switchToTab,
+    resetAllCards,
+    searchAllTabs: () => searchAllTabs,
+    toggleSearchMode: handleSearchModeToggle
+};
     </script>
 </body>
 </html>
