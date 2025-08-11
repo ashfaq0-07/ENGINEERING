@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Engineering Study Resources </title>
+    <title>Engineering Study Resources</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <style>
         * {
             margin: 0;
@@ -16,6 +18,94 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
+            transition: all 0.3s ease;
+        }
+        /* YouTube Card Special Styling */
+.subject-card[data-keywords*="youtube"] {
+    border-left: 5px solid #FF0000; /* YouTube red */
+    background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,230,230,0.95));
+    box-shadow: 0 10px 25px rgba(255, 0, 0, 0.2);
+}
+
+.dark-mode .subject-card[data-keywords*="youtube"] {
+    background: linear-gradient(135deg, rgba(30, 30, 30, 0.95), rgba(50, 30, 30, 0.95));
+    box-shadow: 0 10px 25px rgba(255, 0, 0, 0.3);
+}
+
+.subject-card[data-keywords*="youtube"]::before {
+    background: linear-gradient(90deg, #FF0000, #CC0000) !important;
+}
+
+.subject-card[data-keywords*="youtube"] h3 {
+    color: #FF0000 !important;
+}
+
+/* YouTube icon for the header */
+.subject-card[data-keywords*="youtube"] h3::before {
+    content: '▶ ';
+    color: #FF0000;
+}
+
+/* YouTube link styling */
+.subject-card[data-keywords*="youtube"] .resource-link {
+    background: #FFEBEE;
+    border-color: #FFCDD2;
+    color: #D32F2F;
+}
+
+.subject-card[data-keywords*="youtube"] .resource-link:hover {
+    background: #FF0000;
+    color: white;
+}
+
+.dark-mode .subject-card[data-keywords*="youtube"] .resource-link {
+    background: #3E2723;
+    border-color: #5D4037;
+    color: #EF9A9A;
+}
+
+.dark-mode .subject-card[data-keywords*="youtube"] .resource-link:hover {
+    background: #D32F2F;
+    color: white;
+}
+
+
+
+.subject-card[data-keywords*="youtube"]:hover {
+    animation: none;
+    transform: scale(1.03) translateY(-5px);
+}
+        /* Dark Mode Variables */
+        :root {
+            --primary-color: #4f46e5;
+            --primary-light: #6366f1;
+            --secondary-color: #7c3aed;
+            --text-color: #1e293b;
+            --text-light: #64748b;
+            --bg-color: #ffffff;
+            --card-bg: #ffffff;
+            --nav-bg: #f8fafc;
+            --border-color: #e2e8f0;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --highlight-bg: linear-gradient(135deg, #fef3c7, #fde047);
+            --highlight-border: #f59e0b;
+        }
+
+        /* Dark Mode Theme */
+        body.dark-mode {
+            --primary-color: #8b5cf6;
+            --primary-light: #a78bfa;
+            --secondary-color: #7e22ce;
+            --text-color: #e2e8f0;
+            --text-light: #94a3b8;
+            --bg-color: #1e293b;
+            --card-bg: #334155;
+            --nav-bg: #1e293b;
+            --border-color: #475569;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --highlight-bg: linear-gradient(135deg, #92400e, #b45309);
+            --highlight-border: #f59e0b;
+            background: linear-gradient(135deg, #4b5563 0%, #1e293b 100%);
         }
 
         .dashboard {
@@ -23,15 +113,21 @@
             margin: 0 auto;
             background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 40px var(--shadow-color);
             overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode .dashboard {
+            background: rgba(30, 41, 59, 0.95);
         }
 
         .header {
-            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
             padding: 30px;
             text-align: center;
+            position: relative;
         }
 
         .header h1 {
@@ -47,8 +143,8 @@
 
         .nav-tabs {
             display: flex;
-            background: #f8fafc;
-            border-bottom: 1px solid #e2e8f0;
+            background: var(--nav-bg);
+            border-bottom: 1px solid var(--border-color);
             overflow-x: auto;
         }
 
@@ -59,21 +155,29 @@
             cursor: pointer;
             font-size: 1em;
             font-weight: 500;
-            color: #64748b;
+            color: var(--text-light);
             transition: all 0.3s ease;
             white-space: nowrap;
             border-bottom: 3px solid transparent;
         }
 
         .nav-tab:hover {
-            background: #e2e8f0;
-            color: #475569;
+            background: var(--border-color);
+            color: var(--text-color);
         }
 
         .nav-tab.active {
-            color: #4f46e5;
-            border-bottom-color: #4f46e5;
-            background: white;
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+            background: var(--card-bg);
+        }
+
+        .dark-mode .nav-tab:hover {
+            background: #475569;
+        }
+
+        .dark-mode .nav-tab.active {
+            background: #334155;
         }
 
         .content {
@@ -102,11 +206,11 @@
         }
 
         .subject-card {
-            background: white;
+            background: var(--card-bg);
             border-radius: 15px;
             padding: 25px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 25px var(--shadow-color);
+            border: 1px solid var(--border-color);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -114,7 +218,7 @@
 
         .subject-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 20px 40px var(--shadow-color);
         }
 
         .subject-card::before {
@@ -124,12 +228,12 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, #4f46e5, #7c3aed);
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
         }
 
         .subject-card h3 {
             font-size: 1.3em;
-            color: #1e293b;
+            color: var(--text-color);
             margin-bottom: 15px;
             font-weight: 600;
         }
@@ -140,7 +244,7 @@
 
         .resource-section h4 {
             font-size: 1em;
-            color: #4f46e5;
+            color: var(--primary-color);
             margin-bottom: 10px;
             font-weight: 600;
             display: flex;
@@ -161,25 +265,30 @@
         .resource-link {
             display: inline-block;
             padding: 8px 12px;
-            background: #f1f5f9;
-            color: #475569;
+            background: var(--nav-bg);
+            color: var(--text-color);
             text-decoration: none;
             border-radius: 20px;
             font-size: 0.9em;
             transition: all 0.3s ease;
-            border: 1px solid transparent;
+            border: 1px solid var(--border-color);
         }
 
         .resource-link:hover {
-            background: #4f46e5;
+            background: var(--primary-color);
             color: white;
             transform: translateY(-2px);
+        }
+
+        .dark-mode .resource-link {
+            background: #475569;
+            color: #e2e8f0;
         }
 
         .empty-state {
             text-align: center;
             padding: 40px;
-            color: #64748b;
+            color: var(--text-light);
             font-style: italic;
         }
 
@@ -191,16 +300,17 @@
         .search-input {
             width: 100%;
             padding: 15px 140px 15px 20px;
-            border: 2px solid #e2e8f0;
+            border: 2px solid var(--border-color);
             border-radius: 25px;
             font-size: 1em;
             transition: all 0.3s ease;
-            background: white;
+            background: var(--card-bg);
+            color: var(--text-color);
         }
 
         .search-input:focus {
             outline: none;
-            border-color: #4f46e5;
+            border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
         }
 
@@ -209,14 +319,14 @@
             right: 20px;
             top: 50%;
             transform: translateY(-50%);
-            color: #64748b;
+            color: var(--text-light);
         }
 
         .english-section {
-            background: white;
+            background: var(--card-bg);
             border-radius: 15px;
             padding: 25px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 10px 25px var(--shadow-color);
         }
 
         .english-resources {
@@ -226,14 +336,14 @@
         }
 
         .english-card {
-            background: #f8fafc;
+            background: var(--nav-bg);
             padding: 20px;
             border-radius: 12px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid var(--border-color);
         }
 
         .english-card h4 {
-            color: #1e293b;
+            color: var(--text-color);
             margin-bottom: 15px;
             font-size: 1.1em;
         }
@@ -247,16 +357,110 @@
         }
 
         .english-links a {
-            color: #4f46e5;
+            color: var(--primary-color);
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s ease;
         }
 
         .english-links a:hover {
-            color: #7c3aed;
+            color: var(--secondary-color);
         }
 
+        /* Search Controls */
+        .search-controls {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-mode-toggle {
+            padding: 8px 12px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-size: 0.85em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .search-mode-toggle:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Search Result Highlighting */
+        .search-highlight {
+            background: var(--highlight-bg) !important;
+            border: 2px solid var(--highlight-border) !important;
+            transform: scale(1.02) !important;
+            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3) !important;
+        }
+
+        /* No Results Message */
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-light);
+            font-size: 1.1em;
+            background: var(--nav-bg);
+            border-radius: 15px;
+            border: 2px dashed var(--border-color);
+            margin: 20px 0;
+        }
+
+        .no-results h3 {
+            color: var(--text-color);
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .no-results p {
+            color: var(--text-light);
+            font-size: 1em;
+        }
+
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .dark-mode-toggle i {
+            color: white;
+            font-size: 1.2em;
+        }
+
+        .dark-mode .dark-mode-toggle {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .dark-mode .dark-mode-toggle:hover {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        /* Mobile Responsive Updates */
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2em;
@@ -269,116 +473,151 @@
             .nav-tabs {
                 justify-content: flex-start;
             }
+
+            .search-input {
+                padding-right: 120px;
+            }
+            
+            .search-mode-toggle {
+                font-size: 0.75em;
+                padding: 6px 8px;
+            }
+            
+            .search-controls {
+                gap: 5px;
+            }
         }
-        /* Search Controls */
-.search-controls {
+
+        /* Small mobile devices */
+        @media (max-width: 480px) {
+            .search-input {
+                padding-right: 100px;
+            }
+            
+            .search-mode-toggle {
+                font-size: 0.7em;
+                padding: 4px 6px;
+            }
+        }
+        /* Bookmark Button */
+.bookmark-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    color: #ccc;
+    transition: all 0.3s ease;
     position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 15px;
+    right: 15px;
+    z-index: 2;
+}
+
+.bookmark-btn:hover {
+    color: #ffd700;
+    transform: scale(1.2);
+}
+
+.bookmark-btn.bookmarked {
+    color: #ffd700;
+}
+
+.bookmark-btn.bookmarked:hover {
+    color: #ffcc00;
+}
+
+/* Bookmarks Section */
+.bookmarks-section {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 25px;
+    margin-top: 30px;
+    box-shadow: 0 10px 25px var(--shadow-color);
+}
+
+.bookmarks-section h3 {
+    color: var(--text-color);
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border-color);
     display: flex;
     align-items: center;
-    gap: 10px;
 }
 
-.search-mode-toggle {
-    padding: 8px 12px;
-    background: #4f46e5;
-    color: white;
-    border: none;
-    border-radius: 15px;
-    font-size: 0.85em;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    white-space: nowrap;
+.bookmarks-section h3 i {
+    margin-right: 10px;
+    color: #ffd700;
 }
 
-.search-mode-toggle:hover {
-    background: #3730a3;
+.bookmarks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 15px;
 }
 
-/* Update existing search input - MODIFY your existing .search-input rule */
-.search-input {
-    width: 100%;
-    padding: 15px 140px 15px 20px; /* Updated: increased right padding from 50px to 140px */
-    border: 2px solid #e2e8f0;
-    border-radius: 25px;
-    font-size: 1em;
-    transition: all 0.3s ease;
-    background: white;
-}
-
-/* Search Result Highlighting */
-.search-highlight {
-    background: linear-gradient(135deg, #fef3c7, #fde047) !important;
-    border: 2px solid #f59e0b !important;
-    transform: scale(1.02) !important;
-    box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3) !important;
-}
-
-/* No Results Message */
-.no-results {
+.bookmarks-empty {
     text-align: center;
-    padding: 40px;
-    color: #64748b;
-    font-size: 1.1em;
-    background: #f8fafc;
-    border-radius: 15px;
-    border: 2px dashed #cbd5e1;
-    margin: 20px 0;
+    padding: 20px;
+    color: var(--text-light);
+    font-style: italic;
+    grid-column: 1 / -1;
 }
 
-.no-results h3 {
-    color: #475569;
-    margin-bottom: 10px;
-    font-size: 1.3em;
+/* Animation for bookmarking */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
 }
 
-.no-results p {
-    color: #64748b;
-    font-size: 1em;
+.pulse {
+    animation: pulse 0.3s ease;
+}
+.site-footer {
+  text-align: center;
+  padding: 20px 0;
+  margin: 30px auto 0;
+  width: 100%;
+  font-size: 0.9em;
+  
+  /* Inherits page background */
+  background: transparent !important;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  
+  /* Light mode text */
+  color: white;
 }
 
-/* Mobile Responsive Updates */
-@media (max-width: 768px) {
-    .search-input {
-        padding-right: 120px; /* Adjusted for mobile */
-    }
-    
-    .search-mode-toggle {
-        font-size: 0.75em;
-        padding: 6px 8px;
-    }
-    
-    .search-controls {
-        gap: 5px;
-    }
+.site-footer strong {
+  font-weight: 600;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
 }
 
-/* Small mobile devices */
-@media (max-width: 480px) {
-    .search-input {
-        padding-right: 100px;
-    }
-    
-    .search-mode-toggle {
-        font-size: 0.7em;
-        padding: 4px 6px;
-    }
+/* Dark mode adjustments */
+body.dark-mode .site-footer {
+  color: var(--text-color); /* Light gray text */
+  border-color: var(--border-color); /* Darker border */
 }
 
+body.dark-mode .site-footer strong {
+  color: var(--primary-light); /* Accent color */
+  text-shadow: none;
+}
 
-
-
-</style>
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+
     <div class="dashboard">
         <div class="header">
+              <button class="dark-mode-toggle" id="darkModeToggle">
+  <i class="fas fa-moon"></i>
+</button>
             <h1><b>ENGINEERING MATERIALS </B></h1>
            
         </div>
+      
 
         <div class="nav-tabs">
             <button class="nav-tab active" data-tab="physics">Physics</button>
@@ -386,6 +625,7 @@
             <button class="nav-tab" data-tab="mathematics">Mathematics</button>
             <button class="nav-tab" data-tab="english">English</button>
              <button class="nav-tab" data-tab="questionpapers">Question Papers</button>
+            <button class="nav-tab" data-tab="bookmarks">Bookmarks <i class="fas fa-bookmark"></i></button>
             
 
         </div>
@@ -402,7 +642,28 @@
             <!-- Physics Tab -->
          <div id="physics" class="tab-panel active">
 <div class="subject-grid" id="physicsGrid">
+    <DIV class="subject-card" data-keywords="youtube video lectures">
+        <button class="bookmark-btn" data-keywords="youtube video lectures"><i class="fas fa-bookmark"></i></button>
+            <h3>YouTube</h3>
+            <div class="resource-section">
+                  <h4>CHANNELS</h4>
+                  <div class="resource-links">
+                        <a href="https://www.youtube.com/@aparsclassroom#" target="_blank" class="resource-link">aparsclassroom</a>
+                       
+                        <a href="https://www.youtube.com/@maharab182" target="_blank" class="resource-link">PCM EXPLAINED</a>
+                          <a href="https://www.youtube.com/@apurbophysics" target="_blank" class="resource-link">APURBO PHYSICS</a>
+                        <a href="https://www.youtube.com/@Hemel_Bhai" target="_blank" class="resource-link">HEMELBHAI</a>
+                        <a href="https://www.youtube.com/@ChinmoysPhysicsSolutions" target="_blank" class="resource-link">CHINMOY</a>
+                         <a href="https://www.youtube.com/@PhysicsWallah" target="_blank" class="resource-link">Physics WALLAH</a>
+                        <a href="https://www.youtube.com/@Unacademy" target="_blank" class="resource-link">Unacademy</a>
+
+
+
+                  </div>
+            </div>
+</div>
       <div class="subject-card" data-keywords="vector mechanics force">
+        <button class="bookmark-btn" data-keywords="vector mechanics force"><i class="fas fa-bookmark"></i></button>
             <h3>Vector</h3>
             <div class="resource-section">
                   <h4>Practice Sheet</h4>
@@ -427,6 +688,7 @@
       </div>
 
       <div class="subject-card" data-keywords="mechanics newton motion force">
+        <button class="bookmark-btn" data-keywords="mechanics newton motion force"><i class="fas fa-bookmark"></i></button>
             <h3>Mechanics</h3>
             <div class="resource-section">
                   <h4>Practice Sheet</h4>
@@ -448,11 +710,12 @@
       </div>
 
       <div class="subject-card" data-keywords="work power energy kinetic potential">
+        <button class="bookmark-btn" data-keywords="work power energy kinetic potential"><i class="fas fa-bookmark"></i></button>
             <h3>Work, Power & Energy</h3>
             <div class="resource-section">
                   <h4>Practice Sheet</h4>
                   <div class="resource-links">
-                        <a href="https://drive.google.com/file/d/1c5PF5B-nihlmNoXNaqy770i8HFWRUX-V/view?usp=drivesdk" target="_blank" class="resource-link">WEP Practice Practice</a>
+                       <a href="https://drive.google.com/file/d/1c5PF5B-nihlmNoXNaqy770i8HFWRUX-V/view?usp=drivesdk" target="_blank" class="resource-link">WEP Practice Practice</a>
                   </div>
             </div>
             <div class="resource-section">
@@ -466,6 +729,7 @@
       </div>
 
       <div class="subject-card" data-keywords="gravitation gravity planetary motion">
+        <button class="bookmark-btn" data-keywords="gravitation gravity planetary motion"><i class="fas fa-bookmark"></i></button>
             <h3>Gravitation</h3>
             <div class="resource-section">
                   <h4>Practice Sheet</h4>
@@ -474,7 +738,7 @@
                   </div>
             </div>
             <div class="resource-section">
-                  <h4>ACS  LECTURE SLIDES</h4>
+                 <h4>ACS  LECTURE SLIDES</h4>
                   <div class="resource-links">
                         <a href="https://drive.google.com/file/d/1Yv_dKKK9yYgLFloBW0SQCjWzHhwS9IeI/view?usp=drivesdk" class="resource-link" target="_blank">LECTURE 1 </a>
                         <a href="https://drive.google.com/file/d/1PgOExLDkGZXX-MAeNV3EQwTuRybub3v7/view?usp=drivesdk" class="resource-link" target="_blank">LECTURE 2 </a>
@@ -485,6 +749,7 @@
       </div>
 
       <div class="subject-card" data-keywords="elasticity stress strain young modulus">
+        <button class="bookmark-btn" data-keywords="elasticity stress strain young modulus"><i class="fas fa-bookmark"></i></button>
             <h3>Elasticity</h3>
             <div class="resource-section">
                   <h4>Practice Sheet</h4>
@@ -496,13 +761,14 @@
                   <h4>ACS  LECTURE SLIDES</h4>
                   <div class="resource-links">
                         <a href="https://drive.google.com/file/d/1FT4mOhnSdG7XlD9HddUVO9orxg_KiN8u/view?usp=drivesdk" class="resource-link" target="_blank">LECTURE 1 </a>
-                                                      <a href="https://drive.google.com/file/d/1qn1ATvJ8ueNg1obWx82wSpoEdpOxwLeQ/view?usp=drivesdk" class="resource-link" target="_blank">LECTURE 2 </a>
+                        <a href="https://drive.google.com/file/d/1qn1ATvJ8ueNg1obWx82wSpoEdpOxwLeQ/view?usp=drivesdk" class="resource-link" target="_blank">LECTURE 2 </a>
 
                   </div>
             </div>
       </div>
 
       <div class="subject-card" data-keywords="periodic motion oscillation pendulum shm">
+        <button class="bookmark-btn" data-keywords="periodic motion oscillation pendulum shm"><i class="fas fa-bookmark"></i></button>
             <h3>Periodic Motion</h3>
             <div class="resource-section">
                   <h4>Practice Sheet</h4>
@@ -522,6 +788,7 @@
       </div>
 
       <div class="subject-card" data-keywords="ideal gas kinetic theory pressure temperature">
+        <button class="bookmark-btn" data-keywords="ideal gas kinetic theory pressure temperature"><i class="fas fa-bookmark"></i></button>
             <h3>Ideal Gases</h3>
             <div class="resource-section">
                   <h4>Practice Sheet</h4>
@@ -541,6 +808,7 @@
       </div>
 
       <div class="subject-card" data-keywords="thermodynamics heat temperature entropy">
+        <button class="bookmark-btn" data-keywords="thermodynamics heat temperature entropy"><i class="fas fa-bookmark"></i></button>
             <h3>Thermodynamics</h3>
             <div class="resource-section">
                   <h4>Practice Sheet</h4>
@@ -561,6 +829,7 @@
       </div>
 
       <div class="subject-card" data-keywords="static electricity coulomb electric field potential">
+        <button class="bookmark-btn" data-keywords="static electricity coulomb electric field potential"><i class="fas fa-bookmark"></i></button>
     <h3>Static Electricity</h3>
     <div class="resource-section">
         <h4>Practice Sheet</h4>
@@ -580,10 +849,11 @@
 
 
       <div class="subject-card" data-keywords="current electricity ohm law resistance circuit">
+        <button class="bookmark-btn" data-keywords="current electricity ohm law resistance circuit"><i class="fas fa-bookmark"></i></button>
             <h3>Current Electricity</h3>
             <div class="resource-section">
                   <h4>Practice Sheet</h4>
-                  <div class="resource-links">
+                 <div class="resource-links">
                         <a href="https://drive.google.com/file/d/1bDH2qP4xpQ1ECq3M37y6Ij1LYPIXoxLY/view?usp=drivesdk" target="_blank" class="resource-link">Current Electricity Practice</a>
                   </div>
             </div>
@@ -598,6 +868,7 @@
       </div>
 
       <div class="subject-card" data-keywords="physical optics interference diffraction polarization">
+        <button class="bookmark-btn" data-keywords="physical optics interference diffraction polarization"><i class="fas fa-bookmark"></i></button> 
             <h3>Physical Optics</h3>
             <div class="resource-section">
                   <h4>Practice Sheet</h4>
@@ -618,6 +889,7 @@
       </div>
 
       <div class="subject-card" data-keywords="modern physics quantum relativity photoelectric">
+        <button class="bookmark-btn" data-keywords="modern physics quantum relativity photoelectric"><i class="fas fa-bookmark"></i></button>
             <h3>Modern Physics</h3>
             <div class="resource-section">
                   <h4>Practice Sheet</h4>
@@ -636,6 +908,7 @@
       </div>
 
       <div class="subject-card" data-keywords="nuclear physics radioactivity decay fission fusion">
+        <button class="bookmark-btn" data-keywords="nuclear physics radioactivity decay fission fusion"><i class="fas fa-bookmark"></i></button>
             <h3>Nuclear Physics</h3>
             <div class="resource-section">
                   <h4>Practice Sheet</h4>
@@ -653,6 +926,7 @@
       </div>
 
       <div class="subject-card" data-keywords="semiconductor diode transistor electronics">
+        <button class="bookmark-btn" data-keywords="semiconductor diode transistor electronics"><i class="fas fa-bookmark"></i></button>
             <h3>Semiconductor</h3>
             <div class="resource-section">
                   <h4>Practice Sheet</h4>
@@ -669,33 +943,32 @@
                   </div>
             </div>
       </div>
-      <DIV class="subject-card" data-keywords="youtube video lectures">
-            <h3>YouTube</h3>
-            <div class="resource-section">
-                  <h4>CHANNELS</h4>
-                  <div class="resource-links">
-                        <a href="https://www.youtube.com/@aparsclassroom#" target="_blank" class="resource-link">aparsclassroom</a>
-                       
-                        <a href="https://www.youtube.com/@maharab182" target="_blank" class="resource-link">PCM EXPLAINED</a>
-                          <a href="https://www.youtube.com/@apurbophysics" target="_blank" class="resource-link">APURBO PHYSICS</a>
-                        <a href="https://www.youtube.com/@Hemel_Bhai" target="_blank" class="resource-link">HEMELBHAI</a>
-                        <a href="https://www.youtube.com/@ChinmoysPhysicsSolutions" target="_blank" class="resource-link">CHINMOY</a>
-                         <a href="https://www.youtube.com/@PhysicsWallah" target="_blank" class="resource-link">Physics WALLAH</a>
-                        <a href="https://www.youtube.com/@Unacademy" target="_blank" class="resource-link">Unacademy</a>
-
-
-
-                  </div>
-            </div>
-</div>
+      
 </div>
 </div>
             <!-- Chemistry Tab -->
          <div id="chemistry" class="tab-panel">
 <div class="subject-grid" id="chemistryGrid">
+     <DIV class="subject-card" data-keywords="youtube video lectures">
+        <button class="bookmark-btn" data-keywords="youtube video lectures"><i class="fas fa-bookmark"></i></button>
+            <h3>YouTube</h3>
+            <div class="resource-section">
+                  <h4>CHANNELS</h4>
+                  <div class="resource-links">
+  <a href="https://www.youtube.com/@wbreslyn" target="_blank" class="resource-link">wbreslyn</a>
+  <a href="https://www.youtube.com/@ChemShifu" target="_blank" class="resource-link">CHEMSHIFU</a>
+  <a href="https://www.youtube.com/@Hemel_Bhai" target="_blank" class="resource-link">HEMEL</a>
+  <a href="https://www.youtube.com/@MdNazmussakib81" target="_blank" class="resource-link">NAZMUS SAKIB</a>
+      <a href="https://www.youtube.com/@alchemy149" target="_blank" class="resource-link">ALCHEMY</a>
+      <a href="https://www.youtube.com/@Unacademy" target="_blank" class="resource-link">Unacademy</a>
+      <a href="https://www.youtube.com/@PhysicsWallah" target="_blank" class="resource-link">Physics WALLAH</a>
+</div>
+            </div>
+</div>
 
       <!-- Qualitative Chemistry -->
       <div class="subject-card" data-keywords="qualitative analysis salt identification">
+        <button class="bookmark-btn" data-keywords="qualitative analysis salt identification"><i class="fas fa-bookmark"></i></button>
             <h3>Qualitative Chemistry</h3>
             <div class="resource-section">
                   <h4>Practice Sheet</h4>
@@ -714,6 +987,7 @@
 
       <!-- Stoichiometric Chemistry -->
       <div class="subject-card" data-keywords="stoichiometric chemistry mole calculation">
+        <button class="bookmark-btn" data-keywords="stoichiometric chemistry mole calculation"><i class="fas fa-bookmark"></i></button>
             <h3>Stoichiometric Chemistry</h3>
             <div class="resource-section">
                   <h4>Practice Sheet</h4>
@@ -732,6 +1006,7 @@
 
       <!-- Electrochemistry -->
       <div class="subject-card" data-keywords="electrochemistry galvanic cell electrolysis">
+        <button class="bookmark-btn" data-keywords="electrochemistry galvanic cell electrolysis"><i class="fas fa-bookmark"></i></button>
             <h3>Electrochemistry</h3>
             <div class="resource-section">
                   <h4>Practice Sheet</h4>
@@ -750,6 +1025,7 @@
 
       <!-- Periodic Properties -->
       <div class="subject-card" data-keywords="periodic properties elements atomic radius ionization">
+        <button class="bookmark-btn" data-keywords="periodic properties elements atomic radius ionization"><i class="fas fa-bookmark"></i></button>
             <h3>Periodic Properties of Elements</h3>
             <div class="resource-section">
                   <h4>Practice Sheet</h4>
@@ -771,6 +1047,7 @@
       
  <!-- Chemical Changes -->
 <div class="subject-card" data-keywords="chemical changes reaction kinetics equilibrium">
+    <button class="bookmark-btn" data-keywords="chemical changes reaction kinetics equilibrium"><i class="fas fa-bookmark"></i></button>
     <h3>Chemical Changes</h3>
     <div class="resource-section">
         <h4>Practice Sheet</h4>
@@ -789,6 +1066,7 @@
 
 <!-- Vocational Chemistry -->
 <div class="subject-card" data-keywords="vocational chemistry industrial application">
+    <button class="bookmark-btn" data-keywords="vocational chemistry industrial application"><i class="fas fa-bookmark"></i></button>
     <h3>Vocational Chemistry</h3>
     <div class="resource-section">
         <h4>Practice Sheet</h4>
@@ -806,6 +1084,7 @@
 
 <!-- Environmental Chemistry -->
 <div class="subject-card" data-keywords="environmental chemistry pollution green">
+    <button class="bookmark-btn" data-keywords="environmental chemistry pollution green"><i class="fas fa-bookmark"></i></button>
     <h3>Environmental Chemistry</h3>
     <div class="resource-section">
         <h4>Practice Sheet</h4>
@@ -824,6 +1103,7 @@
 
 <!-- Organic Chemistry -->
 <div class="subject-card" data-keywords="organic chemistry hydrocarbon functional groups">
+    <button class="bookmark-btn" data-keywords="organic chemistry hydrocarbon functional groups"><i class="fas fa-bookmark"></i></button>
     <h3>Organic Chemistry</h3>
     <div class="resource-section">
         <h4>Practice Sheet</h4>
@@ -845,29 +1125,31 @@
         </div>
     </div>
 </div>
- <DIV class="subject-card" data-keywords="youtube video lectures">
-            <h3>YouTube</h3>
-            <div class="resource-section">
-                  <h4>CHANNELS</h4>
-                  <div class="resource-links">
-                          
-  <a href="https://www.youtube.com/@wbreslyn" target="_blank" class="resource-link">wbreslyn</a>
-  <a href="https://www.youtube.com/@ChemShifu" target="_blank" class="resource-link">CHEMSHIFU</a>
-  <a href="https://www.youtube.com/@Hemel_Bhai" target="_blank" class="resource-link">HEMEL</a>
-  <a href="https://www.youtube.com/@MdNazmussakib81" target="_blank" class="resource-link">NAZMUS SAKIB</a>
-      <a href="https://www.youtube.com/@alchemy149" target="_blank" class="resource-link">ALCHEMY</a>
-      <a href="https://www.youtube.com/@Unacademy" target="_blank" class="resource-link">Unacademy</a>
-      <a href="https://www.youtube.com/@PhysicsWallah" target="_blank" class="resource-link">Physics WALLAH</a>
-</div>
-            </div>
-</div>
+
 </div>
 </div>
 
             <!-- Mathematics Tab -->
        <div id="mathematics" class="tab-panel">
   <div class="subject-grid" id="mathematicsGrid">
+      <DIV class="subject-card" data-keywords="youtube video lectures">
+        <button class="bookmark-btn" data-keywords="youtube video lectures"><i class="fas fa-bookmark"></i></button>
+            <h3>YouTube</h3>
+            <div class="resource-section">
+                  <h4>CHANNELS</h4>
+                  <div class="resource-links">
+                        <a href="https://www.youtube.com/@AbhiDattaTushar156" target="_blank" class="resource-link">ABHI</a>
+                        <a href="https://www.youtube.com/@MathScienceNerds" target="_blank" class="resource-link">RAKIB</a>
+                        <a href="https://www.youtube.com/@BHANNATMATHS" target="_blank" class="resource-link">B-M</a>
+                        <a href="https://www.youtube.com/@blackpenredpen" target="_blank" class="resource-link">BPRP</a>
+                         <a href="https://www.youtube.com/@PhysicsWallah" target="_blank" class="resource-link">Physics WALLAH</a>
+                        <a href="https://www.youtube.com/@Unacademy" target="_blank" class="resource-link">Unacademy</a>
+                         <a href="https://www.youtube.com/@jeesimplified" target="_blank" class="resource-link">jeesimplified</a>
+                  </div>
+            </div>
+</div>
     <div class="subject-card" data-keywords="matrix determinant linear algebra">
+      <button class="bookmark-btn" data-keywords="matrix determinant linear algebra"><i class="fas fa-bookmark"></i></button>
       <h3>Matrix & Determinant</h3>
       <div class="resource-section">
         <h4>Practice Sheet</h4>
@@ -885,6 +1167,7 @@
     </div>
 
     <div class="subject-card" data-keywords="straight line coordinate geometry slope">
+      <button class="bookmark-btn" data-keywords="straight line coordinate geometry slope"><i class="fas fa-bookmark"></i></button>
       <h3>Straight Lines</h3>
       <div class="resource-section">
         <h4>Practice Sheet</h4>
@@ -905,6 +1188,7 @@
     </div>
 
     <div class="subject-card" data-keywords="circle geometry radius chord tangent">
+      <button class="bookmark-btn" data-keywords="circle geometry radius chord tangent"><i class="fas fa-bookmark"></i></button>
       <h3>Circle</h3>
       <div class="resource-section">
         <h4>Practice Sheet</h4>
@@ -923,6 +1207,7 @@
     </div>
 
     <div class="subject-card" data-keywords="conics parabola ellipse hyperbola">
+      <button class="bookmark-btn" data-keywords="conics parabola ellipse hyperbola"><i class="fas fa-bookmark"></i></button>
       <h3>Conics</h3>
       <div class="resource-section">
         <h4>Practice Sheet</h4>
@@ -941,6 +1226,7 @@
     </div>
 
     <div class="subject-card" data-keywords="trigonometry sine cosine tangent identities">
+      <button class="bookmark-btn" data-keywords="trigonometry sine cosine tangent identities"><i class="fas fa-bookmark"></i></button>
       <h3>Trigonometry</h3>
       <div class="resource-section">
         <h4>Practice Sheet</h4>
@@ -958,6 +1244,7 @@
     </div>
 
     <div class="subject-card" data-keywords="inverse trigonometry arcsin arccos arctan">
+      <button class="bookmark-btn" data-keywords="inverse trigonometry arcsin arccos arctan"><i class="fas fa-bookmark"></i></button>
       <h3>Inverse Trigonometry</h3>
       <div class="resource-section">
         <h4>Practice Sheet</h4>
@@ -975,6 +1262,7 @@
     </div>
 
     <div class="subject-card" data-keywords="differentiation calculus derivative limit">
+      <button class="bookmark-btn" data-keywords="differentiation calculus derivative limit"><i class="fas fa-bookmark"></i></button>
       <h3>Differentiation</h3>
       <div class="resource-section">
         <h4>Practice Sheet</h4>
@@ -994,6 +1282,7 @@
     </div>
 
     <div class="subject-card" data-keywords="integration calculus antiderivative area">
+      <button class="bookmark-btn" data-keywords="integration calculus antiderivative area"><i class="fas fa-bookmark"></i></button>
       <h3>Integration</h3>
       <div class="resource-section">
         <h4>Practice Sheet</h4>
@@ -1012,6 +1301,7 @@
     </div>
 
     <div class="subject-card" data-keywords="complex numbers imaginary algebra polar">
+      <button class="bookmark-btn" data-keywords="complex numbers imaginary algebra polar"><i class="fas fa-bookmark"></i></button>
       <h3>Complex Numbers</h3>
       <div class="resource-section">
         <h4>Practice Sheet</h4>
@@ -1030,6 +1320,7 @@
     </div>
 
     <div class="subject-card" data-keywords="polynomial equations roots factors quadratic">
+      <button class="bookmark-btn" data-keywords="polynomial equations roots factors quadratic"><i class="fas fa-bookmark"></i></button>
       <h3>Polynomial Equations</h3>
       <div class="resource-section">
         <h4>Practice Sheet</h4>
@@ -1047,6 +1338,7 @@
     </div>
 
     <div class="subject-card" data-keywords="statics equilibrium force moment">
+      <button class="bookmark-btn" data-keywords="statics equilibrium force moment"><i class="fas fa-bookmark"></i></button>
       <h3>Statics</h3>
       <div class="resource-section">
         <h4>Practice Sheet</h4>
@@ -1065,6 +1357,7 @@
     </div>
 
     <div class="subject-card" data-keywords="dynamics motion kinematics acceleration velocity">
+      <button class="bookmark-btn" data-keywords="dynamics motion kinematics acceleration velocity"><i class="fas fa-bookmark"></i></button>
       <h3>Dynamics</h3>
       <div class="resource-section">
         <h4>Practice Sheet</h4>
@@ -1081,41 +1374,17 @@
         </div>
       </div>
     </div>
-     <DIV class="subject-card" data-keywords="youtube video lectures">
-            <h3>YouTube</h3>
-            <div class="resource-section">
-                  <h4>CHANNELS</h4>
-                  <div class="resource-links">
-                        <a href="https://www.youtube.com/@AbhiDattaTushar156" target="_blank" class="resource-link">ABHI</a>
-                        <a href="https://www.youtube.com/@MathScienceNerds" target="_blank" class="resource-link">RAKIB</a>
-                        <a href="https://www.youtube.com/@BHANNATMATHS" target="_blank" class="resource-link">B-M</a>
-                        <a href="https://www.youtube.com/@blackpenredpen" target="_blank" class="resource-link">BPRP</a>
-                         <a href="https://www.youtube.com/@PhysicsWallah" target="_blank" class="resource-link">Physics WALLAH</a>
-                        <a href="https://www.youtube.com/@Unacademy" target="_blank" class="resource-link">Unacademy</a>
-                                                <a href="https://www.youtube.com/@jeesimplified" target="_blank" class="resource-link">jeesimplified</a>
-
-
-
-
-                  </div>
-            </div>
-</div>
+   
   </div>
 </div>
             <!-- English Tab -->
             <div id="english" class="tab-panel">
                 <div class="english-section">
                     <div class="english-resources">
-                        <div class="english-card">
-                            <h4>📺 YouTube Resources</h4>
-                            <ul class="english-links">
-                                <li><a href="https://youtube.com/playlist?list=PLmxbJJ4vBJsbOrh35UbXoTwkzvZN8LN6L&si=fFaaeRcHAwaHuSmd" target="_blank">10 MS Playlist</a></li>
-                                <li><a href="https://youtube.com/playlist?list=PLFlznAZ19jmEZxFdRSpJVwX5KI1lqm1nP&si=oHDlwAQJybLgQBrA" target="_blank">SH JAY Playlist</a></li>
-                            </ul>
-                        </div>
+                       
 
                         <div class="english-card">
-                            <h4>🌐 Online Courses</h4>
+                            <h4>🌐Online Courses</h4>
                             <ul class="english-links">
                                 <li><a href="https://online.udvash-unmesh.com/Content/DisplayContentCard?masterCourseId=41&subjectId=55&masterChapterId=2915&masterContentTypeId=9" target="_blank">UDVASH Marathon 24</a></li>
                                 <li><a href="https://engineering24.aparsclassroom.com/Bonus/Paper-0/Chapter-English" target="_blank">ACS Class 24</a></li>
@@ -1168,6 +1437,13 @@
             <li class="pdf-item"><a href="https://drive.google.com/file/d/1Ds4GY-qRu71QFbo8AG2KkJXk3PDC_Aup/view?usp=drivesdk" class="pdf-link" target="_blank">PRACTICE  11 </a></li>
             <li class="pdf-item"><a href="https://drive.google.com/file/d/1WNAQvQljGQdPoCoixXRnN7Vf_B7M4vC0/view?usp=drivesdk" class="pdf-link" target="_blank">PRACTICE  12 </a></li>
       </ul>
+                        </div>
+                         <div class="english-card">
+                            <h4>📺 YouTube Resources</h4>
+                            <ul class="english-links">
+                                <li><a href="https://youtube.com/playlist?list=PLmxbJJ4vBJsbOrh35UbXoTwkzvZN8LN6L&si=fFaaeRcHAwaHuSmd" target="_blank">10 MS Playlist</a></li>
+                                <li><a href="https://youtube.com/playlist?list=PLFlznAZ19jmEZxFdRSpJVwX5KI1lqm1nP&si=oHDlwAQJybLgQBrA" target="_blank">SH JAY Playlist</a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -1295,31 +1571,41 @@
         
     </div>
 </div>
+<div id="bookmarks" class="tab-panel">
+    <div class="bookmarks-section">
+        <h3><i class="fas fa-bookmark"></i> Your Saved Resources</h3>
+        <div class="bookmarks-grid" id="bookmarksContainer">
+            <div class="bookmarks-empty">
+                <p>You haven't saved any bookmarks yet.</p>
+                <p>Click the <i class="far fa-bookmark"></i> icon on any resource to save it here.</p>
+            </div>
+        </div>
+    </div>
+</div>
     <script>
-        // Enhanced Search JavaScript for Engineering Dashboard
-
-// Enhanced Search JavaScript for Engineering Dashboard
+       // Enhanced Search JavaScript for Engineering Dashboard with localStorage
 
 // Global variables
-let searchAllTabs = true; // Default to search all tabs
+let searchAllTabs = true;
 const searchInput = document.getElementById('searchInput');
 const searchModeToggle = document.getElementById('searchModeToggle');
 const tabs = document.querySelectorAll('.nav-tab');
 const panels = document.querySelectorAll('.tab-panel');
+const darkModeToggle = document.getElementById('darkModeToggle');
+const bookmarksContainer = document.getElementById('bookmarksContainer');
 
 // Initialize the dashboard
 document.addEventListener('DOMContentLoaded', function() {
     initializeDashboard();
     setupEventListeners();
+    initializeDarkMode();
+    initializeBookmarks();
     animateCardsOnLoad();
 });
 
 // Initialize dashboard components
 function initializeDashboard() {
-    // Set initial search mode
     updateSearchModeButton();
-    
-    // Add subject data attributes to cards if not present
     addSubjectAttributes();
 }
 
@@ -1342,27 +1628,168 @@ function setupEventListeners() {
     tabs.forEach(tab => {
         tab.addEventListener('click', handleTabSwitchSearch);
     });
+    
+    // Dark mode toggle
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('click', toggleDarkMode);
+    }
+
+    // Bookmark buttons
+    document.addEventListener('click', function(event) {
+        if (event.target.closest('.bookmark-btn')) {
+            handleBookmarkClick(event);
+        }
+    });
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', handleKeyboardShortcuts);
+}
+
+// Toggle dark mode and save preference
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    
+    const isDark = document.body.classList.contains('dark-mode');
+    darkModeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    localStorage.setItem('darkMode', isDark ? 'enabled' : 'disabled');
+}
+
+// Initialize dark mode from localStorage
+function initializeDarkMode() {
+    const savedMode = localStorage.getItem('darkMode');
+    
+    if (savedMode === 'enabled') {
+        document.body.classList.add('dark-mode');
+        darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    } else {
+        document.body.classList.remove('dark-mode');
+        darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    }
+}
+
+// Handle bookmark clicks
+function handleBookmarkClick(event) {
+    const button = event.target.closest('.bookmark-btn');
+    const card = button.closest('.subject-card, .english-card');
+    
+    if (!card) return;
+    
+    button.classList.toggle('bookmarked');
+    button.innerHTML = button.classList.contains('bookmarked') ? 
+        '<i class="fas fa-bookmark"></i>' : '<i class="far fa-bookmark"></i>';
+    
+    // Save bookmark state
+    const cardId = card.dataset.id;
+    if (!cardId) return;
+    
+    let bookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
+    
+    if (button.classList.contains('bookmarked')) {
+        // Add to bookmarks
+        if (!bookmarks.includes(cardId)) {
+            bookmarks.push(cardId);
+            // Add slight animation when bookmarking
+            button.classList.add('pulse');
+            setTimeout(() => button.classList.remove('pulse'), 300);
+        }
+    } else {
+        // Remove from bookmarks
+        bookmarks = bookmarks.filter(id => id !== cardId);
+    }
+    
+    localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+    
+    // If we're on the bookmarks tab, update it
+    if (document.querySelector('.nav-tab[data-tab="bookmarks"]').classList.contains('active')) {
+        loadBookmarks();
+    }
+}
+
+// Initialize bookmarks from localStorage
+function initializeBookmarks() {
+    // Add IDs to all cards if they don't have them
+    document.querySelectorAll('.subject-card, .english-card').forEach((card, index) => {
+        if (!card.dataset.id) {
+            const tabId = card.closest('.tab-panel').id;
+            card.dataset.id = `${tabId}-${index}`;
+        }
+    });
+    
+    // Load bookmark states
+    const bookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
+    bookmarks.forEach(cardId => {
+        const button = document.querySelector(`[data-id="${cardId}"] .bookmark-btn`);
+        if (button) {
+            button.classList.add('bookmarked');
+            button.innerHTML = '<i class="fas fa-bookmark"></i>';
+        }
+    });
+}
+
+// Load bookmarks into bookmarks tab
+function loadBookmarks() {
+    const bookmarks = JSON.parse(localStorage.getItem('bookmarks')) || [];
+    bookmarksContainer.innerHTML = '';
+    
+    if (bookmarks.length === 0) {
+        bookmarksContainer.innerHTML = `
+            <div class="bookmarks-empty">
+                <p>You haven't saved any bookmarks yet.</p>
+                <p>Click the <i class="far fa-bookmark"></i> icon on any resource to save it here.</p>
+            </div>
+        `;
+        return;
+    }
+    
+    bookmarks.forEach(cardId => {
+        const originalCard = document.querySelector(`[data-id="${cardId}"]`);
+        if (originalCard) {
+            const cardClone = originalCard.cloneNode(true);
+            
+            // Update the bookmark button in the clone
+            const bookmarkBtn = cardClone.querySelector('.bookmark-btn');
+            if (bookmarkBtn) {
+                bookmarkBtn.classList.add('bookmarked');
+                bookmarkBtn.innerHTML = '<i class="fas fa-bookmark"></i>';
+            }
+            
+            bookmarksContainer.appendChild(cardClone);
+        }
+    });
 }
 
 // Handle tab clicking
 function handleTabClick(event) {
-    const clickedTab = event.target;
+    const clickedTab = event.currentTarget;
+    const tabName = clickedTab.dataset.tab;
     
     // Remove active class from all tabs and panels
     tabs.forEach(t => t.classList.remove('active'));
     panels.forEach(p => p.classList.remove('active'));
-
+    
     // Add active class to clicked tab and corresponding panel
     clickedTab.classList.add('active');
-    const targetPanel = document.getElementById(clickedTab.dataset.tab);
-    if (targetPanel) {
-        targetPanel.classList.add('active');
+    
+    if (tabName === 'bookmarks') {
+        loadBookmarks();
+        document.getElementById(tabName).classList.add('active');
+    } else {
+        const targetPanel = document.getElementById(tabName);
+        if (targetPanel) {
+            targetPanel.classList.add('active');
+        }
+    }
+    
+    // Reset search when switching tabs (if not in "search all" mode)
+    if (!searchAllTabs) {
+        searchInput.value = '';
+        resetAllCards();
     }
 }
 
 // Handle search input changes
 function handleSearchInput(event) {
-    const query = event.target.value;
+    const query = event.target.value.trim();
     performSearch(query);
 }
 
@@ -1372,31 +1799,24 @@ function handleSearchModeToggle() {
     updateSearchModeButton();
     
     // Re-run search if there's text in the input
-    const query = searchInput.value;
-    if (query.trim()) {
+    const query = searchInput.value.trim();
+    if (query) {
         performSearch(query);
     } else {
-        // If no search query, show all cards in current mode
         resetAllCards();
     }
 }
 
 // Handle search behavior when switching tabs
 function handleTabSwitchSearch() {
-    if (!searchAllTabs) {
-        // In current tab mode, clear search and show all cards
+    if (!searchAllTabs && searchInput.value.trim()) {
         searchInput.value = '';
-        setTimeout(() => {
-            resetAllCards();
-        }, 100);
+        resetAllCards();
     }
-    // In search all mode, keep the search active
 }
 
 // Main search function
 function performSearch(query) {
-    query = query.toLowerCase().trim();
-    
     if (!query) {
         resetAllCards();
         return;
@@ -1421,13 +1841,12 @@ function searchAcrossAllTabs(query) {
     allCards.forEach(card => {
         const cardText = card.textContent.toLowerCase();
         const keywords = card.dataset.keywords || '';
-        const shouldShow = cardText.includes(query) || keywords.toLowerCase().includes(query);
+        const shouldShow = cardText.includes(query.toLowerCase()) || 
+                          keywords.toLowerCase().includes(query.toLowerCase());
         
         if (shouldShow) {
             hasResults = true;
             matchingCards.push(card);
-            
-            // Highlight matching cards
             card.classList.add('search-highlight');
         } else {
             card.classList.remove('search-highlight');
@@ -1453,6 +1872,7 @@ function searchAcrossAllTabs(query) {
         
         // Update search placeholder
         updateSearchPlaceholder(`Found ${matchingCards.length} result(s) across all subjects`);
+        hideNoResults();
     } else {
         showNoResults();
     }
@@ -1472,7 +1892,8 @@ function searchCurrentTabOnly(query) {
     cards.forEach(card => {
         const cardText = card.textContent.toLowerCase();
         const keywords = card.dataset.keywords || '';
-        const shouldShow = cardText.includes(query) || keywords.toLowerCase().includes(query);
+        const shouldShow = cardText.includes(query.toLowerCase()) || 
+                          keywords.toLowerCase().includes(query.toLowerCase());
         
         card.style.display = shouldShow ? 'block' : 'none';
         
@@ -1542,8 +1963,8 @@ function clearHighlights() {
 // Update search mode button text
 function updateSearchModeButton() {
     if (searchModeToggle) {
-        searchModeToggle.textContent = searchAllTabs ? 'Search All🗘' : 'Current Tab🗘';
-        searchModeToggle.style.background = searchAllTabs ? '#4f46e5' : '#059669';
+        searchModeToggle.textContent = searchAllTabs ? 'Search All' : 'Current Tab';
+        searchModeToggle.style.background = searchAllTabs ? 'var(--primary-color)' : '#059669';
     }
 }
 
@@ -1559,7 +1980,7 @@ function resetSearchPlaceholder() {
 
 // Show no results message
 function showNoResults() {
-    hideNoResults(); // Remove any existing no results message
+    hideNoResults();
     
     const activePanel = document.querySelector('.tab-panel.active');
     if (activePanel) {
@@ -1632,13 +2053,14 @@ function addSubjectAttributes() {
             card.dataset.subject = 'english';
         }
     });
+    
     // Add question papers subject attribute
-const questionpaperCards = document.querySelectorAll('#questionpapers .subject-card, #questionpapers .english-card');
-questionpaperCards.forEach(card => {
-    if (!card.dataset.subject) {
-        card.dataset.subject = 'questionpapers';
-    }
-});
+    const questionpaperCards = document.querySelectorAll('#questionpapers .subject-card');
+    questionpaperCards.forEach(card => {
+        if (!card.dataset.subject) {
+            card.dataset.subject = 'questionpapers';
+        }
+    });
 }
 
 // Animate cards on load
@@ -1649,40 +2071,8 @@ function animateCardsOnLoad() {
     });
 }
 
-// Advanced search features
-function searchWithFilters(query, filters = {}) {
-    // This function can be extended for advanced filtering
-    // filters could include: subject, resourceType, etc.
-    
-    let results = [];
-    const allCards = document.querySelectorAll('.subject-card, .english-card');
-    
-    allCards.forEach(card => {
-        let matches = true;
-        
-        // Text/keyword matching
-        if (query) {
-            const cardText = card.textContent.toLowerCase();
-            const keywords = card.dataset.keywords || '';
-            matches = cardText.includes(query.toLowerCase()) || 
-                     keywords.toLowerCase().includes(query.toLowerCase());
-        }
-        
-        // Subject filtering
-        if (filters.subject && matches) {
-            matches = card.dataset.subject === filters.subject;
-        }
-        
-        if (matches) {
-            results.push(card);
-        }
-    });
-    
-    return results;
-}
-
 // Keyboard shortcuts
-document.addEventListener('keydown', function(event) {
+function handleKeyboardShortcuts(event) {
     // Ctrl/Cmd + K to focus search
     if ((event.ctrlKey || event.metaKey) && event.key === 'k') {
         event.preventDefault();
@@ -1701,17 +2091,37 @@ document.addEventListener('keydown', function(event) {
         event.preventDefault();
         handleSearchModeToggle();
     }
-});
+    
+    // Ctrl/Cmd + D to toggle dark mode
+    if ((event.ctrlKey || event.metaKey) && event.key === 'd') {
+        event.preventDefault();
+        toggleDarkMode();
+    }
+    
+    // Ctrl/Cmd + B to focus on bookmarks tab
+    if ((event.ctrlKey || event.metaKey) && event.key === 'b') {
+        event.preventDefault();
+        const bookmarksTab = document.querySelector('[data-tab="bookmarks"]');
+        if (bookmarksTab) {
+            bookmarksTab.click();
+        }
+    }
+}
 
-// Export functions for potential external use
+// Export functions if needed
 window.dashboardSearch = {
     performSearch,
     switchToTab,
     resetAllCards,
     searchAllTabs: () => searchAllTabs,
-    toggleSearchMode: handleSearchModeToggle
+    toggleSearchMode: handleSearchModeToggle,
+    toggleDarkMode,
+    loadBookmarks
 };
 
     </script>
+    <footer class="site-footer">
+  Created by <strong>Ashfaque</strong> | © 2025
+</footer>
 </body>
 </html>
