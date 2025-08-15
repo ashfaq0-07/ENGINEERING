@@ -792,13 +792,78 @@
         }  
   
         /* Search Result Highlighting */  
-        .search-highlight {  
-            background: var(--highlight-bg) !important;  
-            border: 2px solid var(--highlight-border) !important;  
-            transform: scale(1.02) !important;  
-            box-shadow: 0 12px 40px rgba(245, 158, 11, 0.3) !important;  
-        }  
+        /* Search Result Highlighting - Fixed for theme compatibility */    
+.search-highlight {    
+    background: var(--card-bg-solid) !important;    
+    border: 2px solid var(--primary-color) !important;    
+    transform: scale(1.02) !important;    
+    box-shadow: 0 12px 40px var(--primary-color)30 !important;    
+    position: relative !important;  
+}  
   
+.search-highlight::before {  
+    content: '';  
+    position: absolute;  
+    top: 0;  
+    left: 0;  
+    right: 0;  
+    bottom: 0;  
+    background: linear-gradient(135deg, var(--primary-color)15, var(--accent-color)10);  
+    border-radius: 20px;  
+    pointer-events: none;  
+    z-index: -1;  
+}  
+  
+/* Enhanced search highlight for dark mode */  
+body.dark-mode .search-highlight {  
+    box-shadow: 0 12px 40px var(--primary-color)40 !important;  
+}  
+  
+body.dark-mode .search-highlight::before {  
+    background: linear-gradient(135deg, var(--primary-color)20, var(--accent-color)15);  
+}  
+/* Letter Highlighting Styles */  
+.highlight-text {  
+    background: var(--primary-color);  
+    color: white;  
+    padding: 1px 3px;  
+    border-radius: 3px;  
+    font-weight: var(--font-weight-semibold);  
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);  
+    transition: all 0.2s ease;  
+}  
+  
+/* Dark mode letter highlighting */  
+body.dark-mode .highlight-text {  
+    background: var(--accent-color);  
+    color: var(--text-color);  
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);  
+}  
+  
+/* Pulsing animation for highlighted text */  
+@keyframes highlightPulse {  
+    0%, 100% {   
+        background: var(--primary-color);  
+        transform: scale(1);  
+    }  
+    50% {   
+        background: var(--secondary-color);  
+        transform: scale(1.05);  
+    }  
+}  
+  
+.highlight-text.pulse-highlight {  
+    animation: highlightPulse 1.5s ease-in-out infinite;  
+}  
+  
+/* Different highlight colors for multiple search terms */  
+.highlight-text.highlight-1 { background: var(--primary-color); }  
+.highlight-text.highlight-2 { background: var(--secondary-color); }  
+.highlight-text.highlight-3 { background: var(--accent-color); }  
+  
+body.dark-mode .highlight-text.highlight-1 { background: var(--primary-light); }  
+body.dark-mode .highlight-text.highlight-2 { background: var(--secondary-color); }  
+body.dark-mode .highlight-text.highlight-3 { background: var(--accent-color); }  
         /* No Results Message */  
         .no-results {  
             text-align: center;  
@@ -1432,6 +1497,52 @@
 .daily-paper-group[style*="display: block"] {  
     display: flex !important;  
     flex-direction: column;  
+}
+/* Search Statistics */  
+#searchStats {  
+    font-size: 0.875rem;  
+    color: var(--text-light);  
+    text-align: center;  
+    padding: 8px 16px;  
+    margin-bottom: 16px;  
+    background: var(--card-bg);  
+    border-radius: 8px;  
+    border: 1px solid var(--border-color);  
+    backdrop-filter: var(--glass-blur);  
+    -webkit-backdrop-filter: var(--glass-blur);  
+}  
+  
+/* Highlight Position Indicator */  
+#highlightPosition {  
+    position: fixed;  
+    top: 100px;  
+    right: 20px;  
+    background: var(--primary-color);  
+    color: white;  
+    padding: 8px 12px;  
+    border-radius: 20px;  
+    font-size: 0.875rem;  
+    font-weight: var(--font-weight-medium);  
+    z-index: 1000;  
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);  
+    backdrop-filter: blur(10px);  
+    -webkit-backdrop-filter: blur(10px);  
+    transition: all 0.3s ease;  
+}  
+  
+/* Mobile adjustments */  
+@media (max-width: 768px) {  
+    #highlightPosition {  
+        top: 80px;  
+        right: 10px;  
+        font-size: 0.8125rem;  
+        padding: 6px 10px;  
+    }  
+      
+    .highlight-text {  
+        padding: 1px 2px;  
+        font-size: 0.9em;  
+    }  
 }
  </style>
 </head>
@@ -3036,7 +3147,6 @@ function handleTabSwitchSearch() {
     }  
 }  
   
-// Main search function  
 function performSearch(query) {  
     if (!query) {  
         resetAllCards();  
@@ -3044,26 +3154,23 @@ function performSearch(query) {
     }  
       
     if (searchAllTabs) {  
-        searchAcrossAllTabs(query);  
+        searchAcrossAllTabsWithHighlight(query);  
     } else {  
-        searchCurrentTabOnly(query);  
+        searchCurrentTabOnlyWithHighlight(query);  
     }  
 }  
   
-// Search across all tabs  
-function searchAcrossAllTabs(query) {  
+// Search across all tabs with letter highlighting  
+function searchAcrossAllTabsWithHighlight(query) {  
     const allCards = document.querySelectorAll('.subject-card, .english-card');  
     let matchingCards = [];  
     let hasResults = false;  
       
     // Clear previous highlights  
-    clearHighlights();  
+    clearAllHighlights();  
       
     allCards.forEach(card => {  
-        const cardText = card.textContent.toLowerCase();  
-        const keywords = card.dataset.keywords || '';  
-        const shouldShow = cardText.includes(query.toLowerCase()) ||   
-                          keywords.toLowerCase().includes(query.toLowerCase());  
+        const shouldShow = searchAndHighlightInCard(card, query);  
           
         if (shouldShow) {  
             hasResults = true;  
@@ -3099,8 +3206,8 @@ function searchAcrossAllTabs(query) {
     }  
 }  
   
-// Search only in current tab  
-function searchCurrentTabOnly(query) {  
+// Search only in current tab with letter highlighting  
+function searchCurrentTabOnlyWithHighlight(query) {  
     const activePanel = document.querySelector('.tab-panel.active');  
     if (!activePanel) return;  
       
@@ -3108,13 +3215,10 @@ function searchCurrentTabOnly(query) {
     let hasResults = false;  
       
     // Clear previous highlights  
-    clearHighlights();  
+    clearAllHighlights();  
       
     cards.forEach(card => {  
-        const cardText = card.textContent.toLowerCase();  
-        const keywords = card.dataset.keywords || '';  
-        const shouldShow = cardText.includes(query.toLowerCase()) ||   
-                          keywords.toLowerCase().includes(query.toLowerCase());  
+        const shouldShow = searchAndHighlightInCard(card, query);  
           
         card.style.display = shouldShow ? 'block' : 'none';  
           
@@ -3133,6 +3237,105 @@ function searchCurrentTabOnly(query) {
     }  
 }  
   
+// Main function to search and highlight text within a card  
+function searchAndHighlightInCard(card, query) {  
+    const searchTerms = query.toLowerCase().split(' ').filter(term => term.length > 0);  
+    let hasMatch = false;  
+      
+    // Elements to search in (excluding buttons and icons)  
+    const searchableElements = card.querySelectorAll('h3, h4, .resource-link, p, li');  
+      
+    searchableElements.forEach(element => {  
+        const originalText = element.textContent;  
+        const lowerText = originalText.toLowerCase();  
+          
+        // Check if any search term matches  
+        const termMatches = searchTerms.some(term =>   
+            lowerText.includes(term) ||   
+            (card.dataset.keywords && card.dataset.keywords.toLowerCase().includes(term))  
+        );  
+          
+        if (termMatches) {  
+            hasMatch = true;  
+            highlightTextInElement(element, searchTerms, originalText);  
+        }  
+    });  
+      
+    // Also check keywords  
+    if (!hasMatch && card.dataset.keywords) {  
+        const keywordsMatch = searchTerms.some(term =>   
+            card.dataset.keywords.toLowerCase().includes(term)  
+        );  
+        if (keywordsMatch) {  
+            hasMatch = true;  
+        }  
+    }  
+      
+    return hasMatch;  
+}  
+  
+// Highlight specific text within an element  
+function highlightTextInElement(element, searchTerms, originalText) {  
+    let highlightedText = originalText;  
+      
+    searchTerms.forEach((term, index) => {  
+        if (term.length < 2) return; // Skip very short terms  
+          
+        const regex = new RegExp(`(${escapeRegExp(term)})`, 'gi');  
+        const highlightClass = `highlight-text highlight-${(index % 3) + 1}`;  
+          
+        highlightedText = highlightedText.replace(regex,   
+            `<span class="${highlightClass}">$1</span>`  
+        );  
+    });  
+      
+    // Only update if we actually highlighted something  
+    if (highlightedText !== originalText) {  
+        element.innerHTML = highlightedText;  
+          
+        // Add pulse effect to first few highlights  
+        setTimeout(() => {  
+            const highlights = element.querySelectorAll('.highlight-text');  
+            highlights.forEach((highlight, index) => {  
+                if (index < 3) { // Only first 3 highlights get pulse effect  
+                    highlight.classList.add('pulse-highlight');  
+                    setTimeout(() => {  
+                        highlight.classList.remove('pulse-highlight');  
+                    }, 2000);  
+                }  
+            });  
+        }, 100);  
+    }  
+}  
+  
+// Escape special regex characters  
+function escapeRegExp(string) {  
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');}  
+  
+// Clear all highlights (both card and text highlights)  
+function clearAllHighlights() {  
+    // Clear card highlights  
+    const highlightedCards = document.querySelectorAll('.search-highlight');  
+    highlightedCards.forEach(card => {  
+        card.classList.remove('search-highlight');  
+    });  
+      
+    // Clear text highlights  
+    clearTextHighlights();  
+}  
+  
+// Clear text highlights and restore original text  
+function clearTextHighlights() {  
+    const highlightedElements = document.querySelectorAll('.highlight-text');  
+      
+    highlightedElements.forEach(element => {  
+        const parent = element.parentNode;  
+        parent.replaceChild(document.createTextNode(element.textContent), element);  
+        parent.normalize(); // Merge adjacent text nodes  
+    });  
+}  
+  
+// Enhanced reset function 
 // Helper function to get tab from card  
 function getTabFromCard(card) {  
     // First try data-subject attribute  
@@ -3327,8 +3530,96 @@ function handleKeyboardShortcuts(event) {
             bookmarksTab.click();  
         }  
     }  
+      // F3 or Ctrl/Cmd + G to highlight next result  
+    if (event.key === 'F3' || ((event.ctrlKey || event.metaKey) && event.key === 'g')) {  
+        event.preventDefault();  
+        highlightNextResult();  
+    }  
+      
+    // Shift + F3 or Ctrl/Cmd + Shift + G to highlight previous result  
+    if ((event.key === 'F3' && event.shiftKey) ||   
+        ((event.ctrlKey || event.metaKey) && event.shiftKey && event.key === 'G')) {  
+        event.preventDefault();  
+        highlightPreviousResult();  
+    }  
+}  
+  let currentHighlightIndex = -1;  
+let allHighlightedElements = []; 
+function highlightNextResult() {  
+    allHighlightedElements = document.querySelectorAll('.highlight-text');  
+    if (allHighlightedElements.length === 0) return;  
+      
+    // Remove previous focus  
+    if (currentHighlightIndex >= 0) {  
+        allHighlightedElements[currentHighlightIndex].classList.remove('pulse-highlight');  
+    }  
+      
+    // Move to next  
+    currentHighlightIndex = (currentHighlightIndex + 1) % allHighlightedElements.length;  
+      
+    // Highlight current  
+    const currentElement = allHighlightedElements[currentHighlightIndex];  
+    currentElement.classList.add('pulse-highlight');  
+    currentElement.scrollIntoView({ behavior: 'smooth', block: 'center' });  
+      
+    // Show position indicator  
+    showHighlightPosition(currentHighlightIndex + 1, allHighlightedElements.length);  
+}  
+  function highlightPreviousResult() {  
+    allHighlightedElements = document.querySelectorAll('.highlight-text');  
+    if (allHighlightedElements.length === 0) return;  
+      
+    // Remove previous focus  
+    if (currentHighlightIndex >= 0) {  
+        allHighlightedElements[currentHighlightIndex].classList.remove('pulse-highlight');  
+    }  
+      
+    // Move to previous  
+    currentHighlightIndex = currentHighlightIndex <= 0 ?   
+        allHighlightedElements.length - 1 : currentHighlightIndex - 1;  
+      
+    // Highlight current  
+    const currentElement = allHighlightedElements[currentHighlightIndex];  
+    currentElement.classList.add('pulse-highlight');  
+    currentElement.scrollIntoView({ behavior: 'smooth', block: 'center' });  
+      
+    // Show position indicator  
+    showHighlightPosition(currentHighlightIndex + 1, allHighlightedElements.length);  
+}  
+  function showHighlightPosition(current, total) {  
+    const positionIndicator = document.getElementById('highlightPosition') || createPositionIndicator();  
+    positionIndicator.textContent = `${current} of ${total}`;  
+    positionIndicator.style.display = 'block';  
+      
+    // Hide after 2 seconds  
+    setTimeout(() => {  
+        positionIndicator.style.display = 'none';  
+    }, 2000);  
 }  
   
+// Create position indicator  
+function createPositionIndicator() {  
+    const indicator = document.createElement('div');  
+    indicator.id = 'highlightPosition';  
+    indicator.style.cssText = `  
+        position: fixed;  
+        top: 100px;  
+        right: 20px;  
+        background: var(--primary-color);  
+        color: white;  
+        padding: 8px 12px;  
+        border-radius: 20px;  
+        font-size: 0.875rem;  
+        font-weight: var(--font-weight-medium);  
+        z-index: 1000;  
+        display: none;  
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);  
+    `;  
+      
+    document.body.appendChild(indicator);  
+    return indicator;  
+}  
+
 // Initialize color picker  
 function initializeColorPicker() {  
     setupColorPickerTabs();  
@@ -3666,25 +3957,67 @@ window.colorPickerFunctions = {
 // Additional utility functions for better functionality  
   
 // Debounce function for search  
-function debounce(func, wait) {  
-    let timeout;  
-    return function executedFunction(...args) {  
-        const later = () => {  
-            clearTimeout(timeout);  
-            func(...args);  
-        };  
-        clearTimeout(timeout);  
-        timeout = setTimeout(later, wait);  
-    };  
+// 1. First define the debounce utility function  
+function debounce(func, wait) {    
+    let timeout;    
+    return function executedFunction(...args) {    
+        const later = () => {    
+            clearTimeout(timeout);    
+            func(...args);    
+        };    
+        clearTimeout(timeout);    
+        timeout = setTimeout(later, wait);    
+    };    
 }  
   
-// Enhanced search with debouncing  
-const debouncedSearch = debounce(performSearch, 300);  
+// 2. Then create the debounced search function  
+const debouncedSearch = debounce((query) => {    
+    performSearch(query);    
+}, 250);  
   
-// Update search input handler to use debounced search  
-function handleSearchInput(event) {  
-    const query = event.target.value.trim();  
-    debouncedSearch(query);  
+// 3. Then define the search input handler  
+function handleSearchInput(event) {    
+    const query = event.target.value.trim();    
+        
+    // Clear highlights immediately when search is empty    
+    if (!query) {    
+        resetAllCards();    
+        return;    
+    }    
+        
+    // Use debounced search for better performance    
+    debouncedSearch(query);    
+}  
+// Add search result statistics  
+function updateSearchStats(matchCount, totalSearched) {  
+    const searchStats = document.getElementById('searchStats') || createSearchStatsElement();  
+      
+    if (matchCount > 0) {  
+        searchStats.textContent = `${matchCount} of ${totalSearched} resources match your search`;  
+        searchStats.style.display = 'block';  
+    } else {  
+        searchStats.style.display = 'none';  
+    }  
+}  
+  
+// Create search stats element  
+function createSearchStatsElement() {  
+    const statsElement = document.createElement('div');  
+    statsElement.id = 'searchStats';  
+    statsElement.style.cssText = `  
+        font-size: 0.875rem;  
+        color: var(--text-light);  
+        text-align: center;  
+        padding: 8px;  
+        margin-bottom: 16px;  
+        background: var(--card-bg);  
+        border-radius: 8px;  
+        display: none;  
+    `;  
+     const searchBar = document.querySelector('.search-bar');  
+    searchBar.appendChild(statsElement);  
+      
+    return statsElement;  
 }  
   
 // Smooth scroll to top when switching tabs  
